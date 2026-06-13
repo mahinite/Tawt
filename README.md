@@ -1,20 +1,81 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+  <img src="/icon-192.png" width="120" />
+
+  # TAWT
+
+  **Focus on one thing. Finish it. Move on.**
 </div>
 
-# Run and deploy your AI Studio app
+---
 
-This contains everything you need to run your app locally.
+## Overview
 
-View your app in AI Studio: https://ai.studio/apps/93ac75f5-b0dd-4cfc-81f0-ee8e43f74225
+TAWT is a minimal Pomodoro and task execution system. It combines a focus timer with priority-based task tracking, helping you move through work one cycle at a time — without dashboards, distractions, or noise.
 
-## Run Locally
+---
 
-**Prerequisites:**  Node.js
+## Features
 
+- Pomodoro timer with cycle tracking
+- Priority-based task ordering
+- Automatic task progression
+- Pomodoro → break cycle flow
+- Settings panel with feedback & changelog
+- Installable as a PWA
+- Minimal, distraction-free interface
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+---
+
+## Screens
+
+Clean minimal interface designed for focus.
+
+---
+
+## Philosophy
+
+TAWT is built on a simple idea: **clarity beats complexity.**
+
+- One task in focus at a time
+- No clutter, no unnecessary controls
+- The timer drives the workflow — not the other way around
+- Simplicity is the feature
+
+---
+
+## Tech Stack
+
+- React
+- TypeScript
+- Zustand
+- Vite
+- PWA
+
+---
+
+## Installation / Run Locally
+
+```bash
+npm install
+npm run dev
+```
+
+---
+
+## Future Vision
+
+- Lightweight analytics for cycle history
+- Continued PWA-first mobile experience
+- Additional themes and typography options
+
+---
+
+## Branding
+
+TAWT is intentionally minimal — a focus tool, not a brand statement. Internally, the identity leans on a typewriter-style aesthetic (Courier Prime), kept subtle and out of the way.
+
+---
+
+## License
+
+MIT License
