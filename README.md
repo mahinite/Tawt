@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="/icon-192.png" width="120" />
+  <img src="public/icon-192.png" width="120" />
 
   # TAWT
 
