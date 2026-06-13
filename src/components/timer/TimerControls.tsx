@@ -1,0 +1,38 @@
+import React from 'react';
+import { RotateCcw, Settings as SettingsIcon } from 'lucide-react';
+
+interface TimerControlsProps {
+  isRunning: boolean;
+  onToggle: () => void;
+  onReset: () => void;
+  onSettings: () => void;
+}
+
+export function TimerControls({ isRunning, onToggle, onReset, onSettings }: TimerControlsProps) {
+  return (
+    <div className="flex items-center gap-4">
+      <button
+        onClick={onToggle}
+        className="px-8 py-3 rounded-full border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all text-lg font-medium text-white min-w-[120px]"
+      >
+        {isRunning ? 'Pause' : 'Start'}
+      </button>
+      
+      <button
+        onClick={onReset}
+        className="p-3 rounded-full hover:bg-white/10 transition-colors text-white/60 hover:text-white"
+        aria-label="Reset Timer"
+      >
+        <RotateCcw size={28} />
+      </button>
+      
+      <button
+        onClick={onSettings}
+        className="p-3 rounded-full hover:bg-white/10 transition-colors text-white/60 hover:text-white"
+        aria-label="Settings"
+      >
+        <SettingsIcon size={28} />
+      </button>
+    </div>
+  );
+}
