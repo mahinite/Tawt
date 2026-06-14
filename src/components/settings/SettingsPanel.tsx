@@ -4,6 +4,7 @@ import { useSettingsStore } from '../../store/settingsStore';
 import { useUIStore } from '../../store/uiStore';
 import { APP_VERSION } from '../../config/app_version';
 import { CHANGELOG } from '../../meta/changelog';
+import { Checkbox } from '../ui/Checkbox';
 
 export function SettingsPanel() {
   const isSettingsOpen = useUIStore(state => state.isSettingsOpen);
@@ -100,41 +101,33 @@ export function SettingsPanel() {
             <div className="space-y-3">
               <label className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-2xl cursor-pointer hover:bg-white/10 transition-colors">
                 <span className="text-sm text-white/80">Auto start breaks</span>
-                <input
-                  type="checkbox"
+                <Checkbox
                   checked={settings.autoStartBreak}
-                  onChange={(e) => settings.updateSettings({ autoStartBreak: e.target.checked })}
-                  className="w-5 h-5 accent-gray-300 cursor-pointer rounded"
+                  onChange={(checked) => settings.updateSettings({ autoStartBreak: checked })}
                 />
               </label>
 
               <label className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-2xl cursor-pointer hover:bg-white/10 transition-colors">
                 <span className="text-sm text-white/80">Auto start pomodoros</span>
-                <input
-                  type="checkbox"
+                <Checkbox
                   checked={settings.autoStartPomodoro}
-                  onChange={(e) => settings.updateSettings({ autoStartPomodoro: e.target.checked })}
-                  className="w-5 h-5 accent-gray-300 cursor-pointer rounded"
+                  onChange={(checked) => settings.updateSettings({ autoStartPomodoro: checked })}
                 />
               </label>
 
               <label className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-2xl cursor-pointer hover:bg-white/10 transition-colors">
                 <span className="text-sm text-white/80">Auto advance tasks</span>
-                <input
-                  type="checkbox"
+                <Checkbox
                   checked={settings.autoAdvanceTask}
-                  onChange={(e) => settings.updateSettings({ autoAdvanceTask: e.target.checked })}
-                  className="w-5 h-5 accent-gray-300 cursor-pointer rounded"
+                  onChange={(checked) => settings.updateSettings({ autoAdvanceTask: checked })}
                 />
               </label>
 
               <label className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-2xl cursor-pointer hover:bg-white/10 transition-colors">
                 <span className="text-sm text-white/80">Sound effects</span>
-                <input
-                  type="checkbox"
+                <Checkbox
                   checked={settings.soundEnabled}
-                  onChange={(e) => settings.updateSettings({ soundEnabled: e.target.checked })}
-                  className="w-5 h-5 accent-gray-300 cursor-pointer rounded"
+                  onChange={(checked) => settings.updateSettings({ soundEnabled: checked })}
                 />
               </label>
             </div>
