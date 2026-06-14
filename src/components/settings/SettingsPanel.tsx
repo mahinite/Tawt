@@ -104,7 +104,7 @@ export function SettingsPanel() {
                   type="checkbox"
                   checked={settings.autoStartBreak}
                   onChange={(e) => settings.updateSettings({ autoStartBreak: e.target.checked })}
-                  className="w-5 h-5 accent-white cursor-pointer rounded bg-white/5 border-white/10"
+                  className="w-5 h-5 accent-gray-300 cursor-pointer rounded"
                 />
               </label>
 
@@ -114,7 +114,7 @@ export function SettingsPanel() {
                   type="checkbox"
                   checked={settings.autoStartPomodoro}
                   onChange={(e) => settings.updateSettings({ autoStartPomodoro: e.target.checked })}
-                  className="w-5 h-5 accent-white cursor-pointer rounded bg-white/5 border-white/10"
+                  className="w-5 h-5 accent-gray-300 cursor-pointer rounded"
                 />
               </label>
 
@@ -124,7 +124,7 @@ export function SettingsPanel() {
                   type="checkbox"
                   checked={settings.autoAdvanceTask}
                   onChange={(e) => settings.updateSettings({ autoAdvanceTask: e.target.checked })}
-                  className="w-5 h-5 accent-white cursor-pointer rounded bg-white/5 border-white/10"
+                  className="w-5 h-5 accent-gray-300 cursor-pointer rounded"
                 />
               </label>
 
@@ -134,7 +134,7 @@ export function SettingsPanel() {
                   type="checkbox"
                   checked={settings.soundEnabled}
                   onChange={(e) => settings.updateSettings({ soundEnabled: e.target.checked })}
-                  className="w-5 h-5 accent-white cursor-pointer rounded bg-white/5 border-white/10"
+                  className="w-5 h-5 accent-gray-300 cursor-pointer rounded"
                 />
               </label>
             </div>
