@@ -51,8 +51,16 @@ export function SettingsPanel() {
                 <input
                   type="number"
                   min="1"
+                   max="90"
                   value={settings.pomodoroLength}
-                  onChange={(e) => settings.updateSettings({ pomodoroLength: Math.max(1, parseInt(e.target.value, 10) || 1) })}
+                              onChange={(e) =>
+                                settings.updateSettings({
+                                  pomodoroLength: Math.min(
+                                    90,
+                                    Math.max(1, parseInt(e.target.value, 10) || 1)
+                                  ),
+                                })
+                              }
                   className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
                 />
               </div>
@@ -61,8 +69,16 @@ export function SettingsPanel() {
                 <input
                   type="number"
                   min="1"
+                   max="90"
                   value={settings.shortBreakLength}
-                  onChange={(e) => settings.updateSettings({ shortBreakLength: Math.max(1, parseInt(e.target.value, 10) || 1) })}
+                  onChange={(e) =>
+                    settings.updateSettings({
+                      shortBreakLength: Math.min(
+                        90,
+                        Math.max(1, parseInt(e.target.value, 10) || 1)
+                      ),
+                    })
+                  }
                   className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
                 />
               </div>
@@ -71,8 +87,16 @@ export function SettingsPanel() {
                 <input
                   type="number"
                   min="1"
+                   max="90"
                   value={settings.longBreakLength}
-                  onChange={(e) => settings.updateSettings({ longBreakLength: Math.max(1, parseInt(e.target.value, 10) || 1) })}
+                  onChange={(e) =>
+                    settings.updateSettings({
+                      longBreakLength: Math.min(
+                        90,
+                        Math.max(1, parseInt(e.target.value, 10) || 1)
+                      ),
+                    })
+                  }
                   className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
                 />
               </div>

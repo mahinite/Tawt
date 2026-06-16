@@ -10,14 +10,23 @@ interface TaskItemProps {
   onComplete: (id: string) => void;
   onDelete: (id: string) => void;
   onMovePriority: (id: string, direction: 'up' | 'down') => void;
+
+  openMenuId: string | null;
+  setOpenMenuId: (id: string | null) => void;
 }
 
-export function TaskItem({ task, isActive, onSelect, onComplete, onDelete, onMovePriority }: TaskItemProps) {
+export function TaskItem({ task,
+  isActive,
+  onSelect,
+  onComplete,
+  onDelete,
+  onMovePriority,
+  openMenuId,
+  setOpenMenuId }: TaskItemProps) {
   const completedSecs = task.completedSeconds ?? (task.completedMinutes * 60);
   const targetSecs = task.targetMinutes * 60;
   const progressPercent = targetSecs > 0 ? Math.min(100, Math.round((completedSecs / targetSecs) * 100)) : 0;
   const displayMinutes = Math.floor(completedSecs / 60);
-  const [openMenuId, setOpenMenuId] = React.useState<string | null>(null);
 
   return (
     <div className={`relative p-4 flex flex-col gap-3 rounded-2xl border transition-colors ${

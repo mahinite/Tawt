@@ -16,6 +16,7 @@ export function TaskList({ tasks, activeTaskId, onSelect, onComplete, onDelete, 
   const sorted = [...tasks].sort((a, b) => a.priority - b.priority);
   const activeTasks = sorted.filter(t => t.status === 'active');
   const completedTasks = sorted.filter(t => t.status === 'completed');
+  const [openMenuId, setOpenMenuId] = React.useState<string | null>(null);
   
   if (tasks.length === 0) {
     return (
@@ -43,6 +44,8 @@ export function TaskList({ tasks, activeTaskId, onSelect, onComplete, onDelete, 
               onComplete={onComplete}
               onDelete={onDelete}
               onMovePriority={onMovePriority}
+              openMenuId={openMenuId}
+              setOpenMenuId={setOpenMenuId}
             />
           ))}
         </div>
@@ -60,6 +63,8 @@ export function TaskList({ tasks, activeTaskId, onSelect, onComplete, onDelete, 
               onComplete={onComplete}
               onDelete={onDelete}
               onMovePriority={onMovePriority}
+              openMenuId={openMenuId}
+              setOpenMenuId={setOpenMenuId}
             />
           ))}
         </div>
