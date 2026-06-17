@@ -3,43 +3,42 @@
 
   # TAWT
 
-  **Focus on one thing. Finish it. Move on.**
+  **Pick a task. Focus. Execute.**
 </div>
 
 ---
 
 ## Overview
 
-TAWT is a minimal Pomodoro and task execution system. It combines a focus timer with priority-based task tracking, helping you move through work one cycle at a time — without dashboards, distractions, or noise.
+TAWT is a lightweight focus and task execution app designed to help you stay on a single task at a time.
+
+It combines a simple timer with a task list so you can pick what matters and stay focused without distractions or complex workflows.
+
+This is a personal learning project built while exploring React, PWA development, and UI design.
 
 ---
 
-## Features
+## What it does
 
-- Pomodoro timer with cycle tracking
-- Priority-based task ordering
-- Automatic task progression
-- Pomodoro → break cycle flow
-- Settings panel with feedback & changelog
-- Installable as a PWA
+- Create and manage simple tasks
+- Focus on one active task at a time
+- Built-in timer for structured work sessions
+- Basic task progression and completion flow
 - Minimal, distraction-free interface
-
----
-
-## Screens
-
-Clean minimal interface designed for focus.
+- Installable as a PWA (works like an app)
 
 ---
 
 ## Philosophy
 
-TAWT is built on a simple idea: **clarity beats complexity.**
+TAWT is built around one idea:
+
+> **Clarity beats complexity.**
 
 - One task in focus at a time
-- No clutter, no unnecessary controls
-- The timer drives the workflow — not the other way around
-- Simplicity is the feature
+- Minimal UI, no dashboards or noise
+- Keep the interaction loop small: choose → focus → finish
+- The app should stay out of your way
 
 ---
 
@@ -49,30 +48,35 @@ TAWT is built on a simple idea: **clarity beats complexity.**
 - TypeScript
 - Zustand
 - Vite
-- PWA
+- PWA (vite-plugin-pwa)
 
 ---
 
-## Installation / Run Locally
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
+---
+
+## Status
+
+TAWT is an evolving hobby project.
+
+It is not positioned as a production-grade productivity platform — just an experiment in building a clean, focused workflow tool.
+
+Feedback, ideas, and suggestions are welcome.
 
 ---
 
-## Future Vision
+## Contributing
 
-- Lightweight analytics for cycle history
-- Continued PWA-first mobile experience
-- Additional themes and typography options
+This project is open source.
 
----
+If you're interested in improving it or experimenting with ideas, feel free to open issues or submit pull requests.
 
-## Branding
-
-TAWT is intentionally minimal — a focus tool, not a brand statement. Internally, the identity leans on a typewriter-style aesthetic (Courier Prime), kept subtle and out of the way.
+Even small feedback is appreciated.
 
 ---
 
