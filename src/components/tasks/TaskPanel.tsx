@@ -81,7 +81,7 @@ export function TaskPanel({ isOpen, onClose }: TaskPanelProps) {
           placeholder="What to focus on?"
           className="flex-1 min-w-0 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 placeholder:text-white/30 text-white focus:outline-none focus:border-white/30 transition-colors shadow-inner"
         />
-        <div className="w-[52px] bg-white/5 border border-white/10 rounded-2xl flex items-center pr-1.5 focus-within:border-white/30 transition-colors shadow-inner shrink-0 overflow-hidden">
+        <div className="w-[60px] bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center gap-1.5 focus-within:border-white/30 transition-colors shadow-inner shrink-0 overflow-hidden">
           <input
             type="number"
             value={draftTaskMinutes}
@@ -95,11 +95,11 @@ export function TaskPanel({ isOpen, onClose }: TaskPanelProps) {
               }
             }}
             min="1"
-            className="w-full bg-transparent border-0 text-right pr-0.5 text-white focus:outline-none font-mono text-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            className="w-7 bg-transparent border-0 text-center text-white focus:outline-none font-inter text-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
           />
-          <span className="text-[10px] text-white/30 font-mono select-none pointer-events-none mb-0.5 shrink-0">
-            m
-          </span>
+         <span className="text-sm text-white/50 font-inter select-none pointer-events-none shrink-0">
+  m
+</span>
         </div>
         <button
           type="submit"
