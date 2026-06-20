@@ -10,6 +10,9 @@ export function SettingsPanel() {
   const isSettingsOpen = useUIStore(state => state.isSettingsOpen);
   const closeSettings = useUIStore(state => state.closeSettings);
   const settings = useSettingsStore();
+  const [tempPomodoro, setTempPomodoro] = React.useState(settings.pomodoroLength);
+  const [tempShortBreak, setTempShortBreak] = React.useState(settings.shortBreakLength);
+  const [tempLongBreak, setTempLongBreak] = React.useState(settings.longBreakLength);
 
   useEffect(() => {
     if (!isSettingsOpen) return;
@@ -21,6 +24,14 @@ export function SettingsPanel() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isSettingsOpen, closeSettings]);
+
+  useEffect(() => {
+  if (!isSettingsOpen) return;
+
+  setTempPomodoro(settings.pomodoroLength);
+    setTempShortBreak(settings.shortBreakLength);
+    setTempLongBreak(settings.longBreakLength);
+  }, [isSettingsOpen]);
 
   if (!isSettingsOpen) return null;
 
@@ -52,15 +63,23 @@ export function SettingsPanel() {
                   type="number"
                   min="1"
                    max="90"
-                  value={settings.pomodoroLength}
-                              onChange={(e) =>
-                                settings.updateSettings({
-                                  pomodoroLength: Math.min(
-                                    90,
-                                    Math.max(1, parseInt(e.target.value, 10) || 1)
-                                  ),
-                                })
-                              }
+                  value={tempPomodoro}
+                          onChange={(e) => setTempPomodoro(e.target.value)}
+                          onBlur={() => {
+                            const val = parseInt(tempPomodoro, 10);
+
+                            const safe = isNaN(val)
+                              ? 1
+                              : Math.min(90, Math.max(1, val));
+
+                            setTempPomodoro(String(safe));
+                            settings.updateSettings({ pomodoroLength: String(safe) });
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                              (e.target as HTMLInputElement).blur();
+                            }
+                          }}
                   className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
                 />
               </div>
@@ -70,15 +89,23 @@ export function SettingsPanel() {
                   type="number"
                   min="1"
                    max="90"
-                  value={settings.shortBreakLength}
-                  onChange={(e) =>
-                    settings.updateSettings({
-                      shortBreakLength: Math.min(
-                        90,
-                        Math.max(1, parseInt(e.target.value, 10) || 1)
-                      ),
-                    })
-                  }
+                 value={tempShortBreak}
+                    onChange={(e) => setTempShortBreak(e.target.value)}
+                    onBlur={() => {
+                      const val = parseInt(tempShortBreak, 10);
+
+                      const safe = isNaN(val)
+                        ? 1
+                        : Math.min(90, Math.max(1, val));
+
+                      setTempShortBreak(String(safe));
+                      settings.updateSettings({ shortBreakLength: String(safe) });
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        (e.target as HTMLInputElement).blur();
+                      }
+                    }}
                   className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
                 />
               </div>
@@ -88,15 +115,23 @@ export function SettingsPanel() {
                   type="number"
                   min="1"
                    max="90"
-                  value={settings.longBreakLength}
-                  onChange={(e) =>
-                    settings.updateSettings({
-                      longBreakLength: Math.min(
-                        90,
-                        Math.max(1, parseInt(e.target.value, 10) || 1)
-                      ),
-                    })
-                  }
+                  value={tempLongBreak}
+                        onChange={(e) => setTempLongBreak(e.target.value)}
+                        onBlur={() => {
+                          const val = parseInt(tempLongBreak, 10);
+
+                          const safe = isNaN(val)
+                            ? 1
+                            : Math.min(90, Math.max(1, val));
+
+                          setTempLongBreak(String(safe));
+                          settings.updateSettings({ longBreakLength: String(safe) });
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            (e.target as HTMLInputElement).blur();
+                          }
+                        }}
                   className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
                 />
               </div>
@@ -110,9 +145,22 @@ export function SettingsPanel() {
               <span className="text-sm text-white/80">Long break interval</span>
               <input
                 type="number"
-                min="1"
+                min="0"
                 value={settings.longBreakInterval}
-                onChange={(e) => settings.updateSettings({ longBreakInterval: Math.max(1, parseInt(e.target.value, 10) || 1) })}
+                onChange={(e) =>
+                      settings.updateSettings({
+                        longBreakInterval: e.target.value
+                      })
+                    }
+                  onBlur={() => {
+                    const val = parseInt(settings.longBreakInterval, 10);
+
+                    settings.updateSettings({
+                      longBreakInterval: String(
+                        isNaN(val) || val < 0 ? 0 : val
+                      )
+                    });
+                  }}
                 className="w-16 bg-white/5 border border-white/10 rounded-xl px-2 py-1 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
               />
             </div>
