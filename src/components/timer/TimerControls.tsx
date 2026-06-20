@@ -10,10 +10,10 @@ interface TimerControlsProps {
 
 export function TimerControls({ isRunning, onToggle, onReset, onSettings }: TimerControlsProps) {
   return (
-    <div className="flex items-center justify-center gap-2 sm:gap-4 flex-nowrap overflow-x-auto">
+    <div className="flex items-center justify-center gap-3 sm:gap-4 flex-nowrap">
       <button
         onClick={onToggle}
-        className="px-[clamp(1.2rem,2.5vw,2rem)] py-[clamp(0.5rem,1.2vw,0.9rem)] text-[clamp(0.85rem,1.5vw,1.1rem)] rounded-full border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all font-medium text-white min-w-[90px] sm:min-w-[120px]"
+        className="px-5 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 text-sm sm:text-base lg:text-lg rounded-full border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all font-medium text-white min-w-[100px] sm:min-w-[120px] lg:min-w-[140px]"
       >
         {isRunning ? 'Pause' : 'Start'}
       </button>
