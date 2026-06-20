@@ -6,7 +6,7 @@ interface TimerDisplayProps {
 
 export function TimerDisplay({ time }: TimerDisplayProps) {
   return (
-    <div className="text-[8rem] md:text-[12rem] font-bold tracking-tight my-8 font-mono leading-none select-none">
+    <div className="text-[clamp(6rem,12vw,9rem)] font-bold tracking-tight my-6 font-mono leading-none select-none">
       {time}
     </div>
   );
