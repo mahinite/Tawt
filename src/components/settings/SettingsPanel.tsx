@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { useSettingsStore } from '../../store/settingsStore';
 import { useUIStore } from '../../store/uiStore';
 import { APP_VERSION } from '../../config/app_version';
 import { CHANGELOG } from '../../meta/changelog';
 import { Checkbox } from '../ui/Checkbox';
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 export function SettingsPanel() {
   const isSettingsOpen = useUIStore(state => state.isSettingsOpen);
@@ -13,6 +14,9 @@ export function SettingsPanel() {
   const [tempPomodoro, setTempPomodoro] = React.useState<string | number>(settings.pomodoroLength);
   const [tempShortBreak, setTempShortBreak] = React.useState<string | number>(settings.shortBreakLength);
   const [tempLongBreak, setTempLongBreak] = React.useState<string | number>(settings.longBreakLength);
+
+  const settingsRef = useRef<HTMLDivElement>(null);
+  useClickOutside(settingsRef, closeSettings);
 
   useEffect(() => {
     if (!isSettingsOpen) return;
@@ -38,7 +42,7 @@ export function SettingsPanel() {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-fade-in">
       {/* Panel Container */}
-      <div className="w-full max-w-[420px] bg-[#0A0A0A] border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[85vh] rounded-[32px]">
+      <div ref={settingsRef} className="w-full max-w-[420px] bg-[#0A0A0A] border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[85vh] rounded-[32px]">
         
         {/* Header */}
         <div className="px-6 py-6 border-b border-white/5 flex items-center justify-between shrink-0">

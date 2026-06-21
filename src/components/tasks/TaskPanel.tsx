@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X, Plus } from 'lucide-react';
 import { TaskList } from './TaskList';
 import { useTasks } from '../../hooks/useTasks';
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 interface TaskPanelProps {
   isOpen: boolean;
@@ -23,6 +24,22 @@ export function TaskPanel({ isOpen, onClose }: TaskPanelProps) {
     moveTaskPriority
   } = useTasks();
 
+  const panelRef = useRef<HTMLDivElement>(null);
+  useClickOutside(panelRef, onClose);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleAddTask = (e: React.FormEvent) => {
@@ -43,7 +60,7 @@ export function TaskPanel({ isOpen, onClose }: TaskPanelProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 bg-black/70 backdrop-blur-md">
       {/* Panel Container */}
-      <div className="w-full max-w-[92vw] sm:max-w-[420px] bg-[#0A0A0A] border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[85vh] rounded-2xl sm:rounded-[32px]">
+      <div ref={panelRef} className="w-full max-w-[92vw] sm:max-w-[420px] bg-[#0A0A0A] border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[85vh] rounded-2xl sm:rounded-[32px]">
         
         {/* Header */}
         <div className="px-4 sm:px-6 py-5 sm:py-6 border-b border-white/5 flex items-center justify-between shrink-0">

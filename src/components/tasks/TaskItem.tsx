@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import type { Task } from '../../types';
 import { CheckCircle2, Trash2, PlayCircle, ArrowUp, ArrowDown } from 'lucide-react';
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 interface TaskItemProps {
   key?: string | number;
@@ -28,6 +29,23 @@ export function TaskItem({ task,
   const progressPercent = targetSecs > 0 ? Math.min(100, Math.round((completedSecs / targetSecs) * 100)) : 0;
   const displayMinutes = Math.floor(completedSecs / 60);
 
+  const menuRef = useRef<HTMLDivElement>(null);
+  useClickOutside(menuRef, () => setOpenMenuId(null));
+
+  const isOpen = openMenuId === task.id;
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpenMenuId(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, setOpenMenuId]);
+
   return (
     <div className={`relative p-4 flex flex-col gap-3 rounded-2xl border transition-colors ${
       isActive 
@@ -37,7 +55,7 @@ export function TaskItem({ task,
 {/* for menu dropdown */}
       
       {openMenuId === task.id && (
-  <div className="absolute right-4 top-14 w-36 bg-[#111] border border-white/10 rounded-xl shadow-lg overflow-hidden z-50">
+  <div ref={menuRef} className="absolute right-4 top-14 w-36 bg-[#111] border border-white/10 rounded-xl shadow-lg overflow-hidden z-50">
     
     <button
       onClick={() => {
@@ -107,11 +125,13 @@ export function TaskItem({ task,
           )}
           
           <button
-                onClick={() => setOpenMenuId(openMenuId === task.id ? null : task.id)}
-                className="p-2.5 hover:bg-white/10 rounded-full text-white/60 hover:text-white transition-colors"
-              >
-                ⋯
-              </button>
+                 onMouseDown={(e) => e.stopPropagation()}
+                 onTouchStart={(e) => e.stopPropagation()}
+                 onClick={() => setOpenMenuId(openMenuId === task.id ? null : task.id)}
+                 className="p-2.5 hover:bg-white/10 rounded-full text-white/60 hover:text-white transition-colors"
+               >
+                 ⋯
+               </button>
               
         </div>
       </div>
