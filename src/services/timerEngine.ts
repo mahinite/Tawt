@@ -23,17 +23,22 @@ export class TimerEngine {
     this.deps = deps;
   }
 
-  public start(): void {
-    const state = this.deps.getTimerState();
-    if (state.running || state.remainingSeconds <= 0) return;
+public start(): void {
+  const state = this.deps.getTimerState();
+  if (state.running || state.remainingSeconds <= 0) return;
 
-    this.deps.setTimerState({ running: true });
-    
-    // Using globalThis ensures agnostic behavior (Node/Browser) without 'window'
-    this.intervalId = (globalThis as any).setInterval(() => {
-      this.tick();
-    }, 1000) as number;
-  }
+  const now = Date.now();
+
+  this.deps.setTimerState({
+    running: true,
+    startTimestamp: now,
+    endTimestamp: now + state.remainingSeconds * 1000
+  });
+
+  this.intervalId = (globalThis as any).setInterval(() => {
+    this.tick();
+  }, 250) as number;
+}
 
   public pause(): void {
     this.deps.setTimerState({ running: false });
@@ -59,24 +64,30 @@ export class TimerEngine {
   }
 
   private tick(): void {
-    const state = this.deps.getTimerState();
-    
-    // Safety check: Prevent race conditions or running while processing completion
-    if (!state.running || this.isProcessingComplete) {
-      return;
-    }
+  const state = this.deps.getTimerState();
 
-    // Directly update task progress every pomodoro second — no events, no indirection
-    if (state.mode === 'pomodoro') {
-      this.deps.onPomodoroTick();
-    }
+  if (!state.running || this.isProcessingComplete) {
+    return;
+        }
 
-    if (state.remainingSeconds <= 1) {
-      this.handleSessionComplete();
-    } else {
-      this.deps.setTimerState({ remainingSeconds: state.remainingSeconds - 1 });
-    }
-  }
+        const now = Date.now();
+        const remaining = Math.max(
+          0,
+          Math.floor((state.endTimestamp! - now) / 1000)
+        );
+
+        this.deps.setTimerState({
+          remainingSeconds: remaining
+        });
+
+        if (state.mode === 'pomodoro') {
+          this.deps.onPomodoroTick();
+        }
+
+        if (remaining <= 0) {
+          this.handleSessionComplete();
+        }
+        }
 
   private handleSessionComplete(): void {
     this.isProcessingComplete = true; // Lock
@@ -162,12 +173,16 @@ export class TimerEngine {
   }
 
   private applyMode(mode: TimerMode): void {
-    const settings = this.deps.getSettings();
-    const durationSeconds = this.getDurationForMode(mode, settings) * 60;
-    this.deps.setTimerState({ 
-      mode, 
-      remainingSeconds: durationSeconds, 
-      running: false 
+  const settings = this.deps.getSettings();
+  const durationSeconds = this.getDurationForMode(mode, settings) * 60;
+
+  this.deps.setTimerState({
+    mode,
+    remainingSeconds: durationSeconds,
+    running: false,
+
+    startTimestamp: null,
+    endTimestamp: null,
     });
   }
 }

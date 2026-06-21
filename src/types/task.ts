@@ -34,4 +34,7 @@ export interface Task {
 
   /** Optional: Allows future task categorizations, tags or project groupings */
   projectId?: string;
+
+  /** Internal field to track the last time the task was updated with focus time, used for accurate time tracking on Pomodoro ticks */
+  lastTick?: number;
 }

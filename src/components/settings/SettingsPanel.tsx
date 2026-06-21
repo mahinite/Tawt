@@ -10,9 +10,9 @@ export function SettingsPanel() {
   const isSettingsOpen = useUIStore(state => state.isSettingsOpen);
   const closeSettings = useUIStore(state => state.closeSettings);
   const settings = useSettingsStore();
-  const [tempPomodoro, setTempPomodoro] = React.useState(settings.pomodoroLength);
-  const [tempShortBreak, setTempShortBreak] = React.useState(settings.shortBreakLength);
-  const [tempLongBreak, setTempLongBreak] = React.useState(settings.longBreakLength);
+  const [tempPomodoro, setTempPomodoro] = React.useState<string | number>(settings.pomodoroLength);
+  const [tempShortBreak, setTempShortBreak] = React.useState<string | number>(settings.shortBreakLength);
+  const [tempLongBreak, setTempLongBreak] = React.useState<string | number>(settings.longBreakLength);
 
   useEffect(() => {
     if (!isSettingsOpen) return;
@@ -73,7 +73,7 @@ export function SettingsPanel() {
                               : Math.min(90, Math.max(1, val));
 
                             setTempPomodoro(String(safe));
-                            settings.updateSettings({ pomodoroLength: String(safe) });
+                            settings.updateSettings({ pomodoroLength: safe });
                           }}
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
@@ -99,7 +99,7 @@ export function SettingsPanel() {
                         : Math.min(90, Math.max(1, val));
 
                       setTempShortBreak(String(safe));
-                      settings.updateSettings({ shortBreakLength: String(safe) });
+                      settings.updateSettings({ shortBreakLength: safe });
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
@@ -125,7 +125,7 @@ export function SettingsPanel() {
                             : Math.min(90, Math.max(1, val));
 
                           setTempLongBreak(String(safe));
-                          settings.updateSettings({ longBreakLength: String(safe) });
+                          settings.updateSettings({ longBreakLength: safe });
                         }}
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
@@ -149,16 +149,14 @@ export function SettingsPanel() {
                 value={settings.longBreakInterval}
                 onChange={(e) =>
                       settings.updateSettings({
-                        longBreakInterval: e.target.value
+                        longBreakInterval: Number(e.target.value)
                       })
                     }
                   onBlur={() => {
-                    const val = parseInt(settings.longBreakInterval, 10);
+                    const val = parseInt(String(settings.longBreakInterval), 10);
 
                     settings.updateSettings({
-                      longBreakInterval: String(
-                        isNaN(val) || val < 0 ? 0 : val
-                      )
+                      longBreakInterval: isNaN(val) || val < 0 ? 0 : val
                     });
                   }}
                 className="w-16 bg-white/5 border border-white/10 rounded-xl px-2 py-1 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"

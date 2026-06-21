@@ -9,6 +9,10 @@ import { useTaskStore } from './taskStore';
  * Wires the framework-agnostic domain engine to the specific state management
  * strategy (Zustand) and event systems.
  */
+let lastRemainingSeconds = -1;
+let lastTaskId: string | null = null;
+let lastCycleCount = -1;
+
 export const timerEngine = new TimerEngine({
   getTimerState: () => useTimerStore.getState(),
   // Passing Zustand's native setState setter
@@ -18,16 +22,54 @@ export const timerEngine = new TimerEngine({
   emitEvent: <T>(eventName: string, payload: T) => eventBus.emit(eventName, payload),
   // Direct synchronous task update — called every pomodoro second, no events involved
   onPomodoroTick: () => {
-    const { activeTaskId, addFocusSecond, completeTask, advanceTask } = useTaskStore.getState();
-    if (activeTaskId) {
-      addFocusSecond(activeTaskId);
-      const task = useTaskStore.getState().tasks.find(t => t.id === activeTaskId);
-      if (task && task.completedSeconds >= task.targetMinutes * 60) {
-        completeTask(activeTaskId);
-        const { autoAdvanceTask } = useSettingsStore.getState();
-        if (autoAdvanceTask) {
-          advanceTask();
-        }
+    const store = useTaskStore.getState();
+    const activeTaskId = store.activeTaskId;
+
+    if (!activeTaskId) {
+      lastTaskId = null;
+      return;
+    }
+
+    const task = store.tasks.find(t => t.id === activeTaskId);
+    if (!task) {
+      lastTaskId = null;
+      return;
+    }
+
+    const timerState = useTimerStore.getState();
+    const settings = useSettingsStore.getState();
+
+    // Required by Safe Fix Plan: calculate absolute elapsed time of this pomodoro
+    const totalPomodoroDurationInSeconds = settings.pomodoroLength * 60;
+    const remainingSeconds = timerState.remainingSeconds;
+    const elapsed = totalPomodoroDurationInSeconds - remainingSeconds;
+
+    // Use absolute remainingSeconds differences to add to the total task elapsed time,
+    // ensuring we do not rely on interval frequency (ticks).
+    if (
+      lastRemainingSeconds === -1 || 
+      remainingSeconds > lastRemainingSeconds || 
+      activeTaskId !== lastTaskId ||
+      timerState.cycleCount !== lastCycleCount
+    ) {
+      lastRemainingSeconds = remainingSeconds;
+      lastTaskId = activeTaskId;
+      lastCycleCount = timerState.cycleCount;
+    }
+
+    const delta = lastRemainingSeconds - remainingSeconds;
+    if (delta > 0) {
+      store.setTaskElapsed(activeTaskId, task.completedSeconds + delta);
+      lastRemainingSeconds = remainingSeconds;
+    }
+
+    const updatedTask = store.tasks.find(t => t.id === activeTaskId);
+    if (updatedTask && updatedTask.completedSeconds >= updatedTask.targetMinutes * 60) {
+      store.completeTask(activeTaskId);
+
+      const { autoAdvanceTask } = useSettingsStore.getState();
+      if (autoAdvanceTask) {
+        store.advanceTask();
       }
     }
   },

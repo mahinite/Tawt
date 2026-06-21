@@ -15,9 +15,9 @@ interface TaskStore {
   completeTask: (id: string) => void;
   deleteTask: (id: string) => void;
   addFocusTime: (id: string, additionalMinutes: number) => void;
-  addFocusSecond: (id: string) => void;
   advanceTask: () => void;
   moveTaskPriority: (id: string, direction: 'up' | 'down') => void;
+  setTaskElapsed: (taskId: string, seconds: number) => void;
 }
 
 export const useTaskStore = create<TaskStore>()(
@@ -73,15 +73,14 @@ export const useTaskStore = create<TaskStore>()(
           return { tasks: updated };
         });
       },
-      addFocusSecond: (taskId) => {
+      setTaskElapsed: (taskId: string, seconds: number) => {
         set((state) => ({
           tasks: state.tasks.map(t => {
             if (t.id !== taskId) return t;
-            const newSeconds = (t.completedSeconds ?? 0) + 1;
             return {
               ...t,
-              completedSeconds: newSeconds,
-              completedMinutes: Math.floor(newSeconds / 60),
+              completedSeconds: seconds,
+              completedMinutes: Math.floor(seconds / 60),
             };
           }),
         }));

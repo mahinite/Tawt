@@ -15,6 +15,9 @@ const initialState: TimerState = {
   remainingSeconds: (useSettingsStore.getState().pomodoroLength || 25) * 60,
   running: false,
   cycleCount: 0,
+
+  startTimestamp: null,
+  endTimestamp: null,
 };
 
 export const useTimerStore = create<TimerStore>()(
@@ -25,11 +28,15 @@ export const useTimerStore = create<TimerStore>()(
     {
       name: 'tawt-timer-storage',
       partialize: (state) => ({
-        mode: state.mode,
-        remainingSeconds: state.remainingSeconds,
-        cycleCount: state.cycleCount,
-        running: false, // Ensure timer pauses on browser reload
-      }),
+  mode: state.mode,
+      remainingSeconds: state.remainingSeconds,
+      cycleCount: state.cycleCount,
+      running: false,
+
+      startTimestamp: state.startTimestamp,
+      endTimestamp: state.endTimestamp,
+    }), // Ensure timer pauses on browser reload
+      
     }
   )
 );

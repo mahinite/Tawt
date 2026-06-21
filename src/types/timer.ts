@@ -8,17 +8,13 @@ export type TimerMode = "pomodoro" | "shortBreak" | "longBreak";
  * Fully unaware of UI and Task constructs.
  */
 export interface TimerState {
-  /** Current operating mode of the timer */
   mode: TimerMode;
-
-  /** Time remaining in the current session (in seconds) */
   remainingSeconds: number;
-
-  /** Whether the timer is actively counting down */
   running: boolean;
-
-  /** Number of completed pomodoro cycles (used to trigger long breaks and compute statistics) */
   cycleCount: number;
+
+  startTimestamp: number | null;
+  endTimestamp: number | null;
 }
 
 /**
