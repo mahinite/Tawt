@@ -14,6 +14,9 @@ export function SettingsPanel() {
   const [tempPomodoro, setTempPomodoro] = React.useState<string | number>(settings.pomodoroLength);
   const [tempShortBreak, setTempShortBreak] = React.useState<string | number>(settings.shortBreakLength);
   const [tempLongBreak, setTempLongBreak] = React.useState<string | number>(settings.longBreakLength);
+const [tempLongBreakInterval, setTempLongBreakInterval] = React.useState<string>(
+  String(settings.longBreakInterval)
+);
 
   const settingsRef = useRef<HTMLDivElement>(null);
   useClickOutside(settingsRef, closeSettings);
@@ -29,13 +32,14 @@ export function SettingsPanel() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isSettingsOpen, closeSettings]);
 
-  useEffect(() => {
+useEffect(() => {
   if (!isSettingsOpen) return;
 
   setTempPomodoro(settings.pomodoroLength);
-    setTempShortBreak(settings.shortBreakLength);
-    setTempLongBreak(settings.longBreakLength);
-  }, [isSettingsOpen]);
+  setTempShortBreak(settings.shortBreakLength);
+  setTempLongBreak(settings.longBreakLength);
+  setTempLongBreakInterval(String(settings.longBreakInterval));
+}, [isSettingsOpen]);
 
   if (!isSettingsOpen) return null;
 
@@ -148,20 +152,25 @@ export function SettingsPanel() {
             <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-2xl p-4">
               <span className="text-sm text-white/80">Long break interval</span>
               <input
-                type="number"
-                min="0"
-                value={settings.longBreakInterval}
-                onChange={(e) =>
-                      settings.updateSettings({
-                        longBreakInterval: Number(e.target.value)
-                      })
-                    }
+                  type="number"
+                  min="0"
+                  value={tempLongBreakInterval}
+                  onChange={(e) => setTempLongBreakInterval(e.target.value)}
                   onBlur={() => {
-                    const val = parseInt(String(settings.longBreakInterval), 10);
+                    const val = parseInt(tempLongBreakInterval, 10);
+
+                    const safe = isNaN(val) || val < 0 ? 0 : val;
+
+                    setTempLongBreakInterval(String(safe));
 
                     settings.updateSettings({
-                      longBreakInterval: isNaN(val) || val < 0 ? 0 : val
+                      longBreakInterval: safe
                     });
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      (e.target as HTMLInputElement).blur();
+                    }
                   }}
                 className="w-16 bg-white/5 border border-white/10 rounded-xl px-2 py-1 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
               />
