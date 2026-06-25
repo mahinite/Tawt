@@ -26,48 +26,66 @@ export function FocusPage() {
 
   return (
     <main className="min-h-screen bg-black text-white flex flex-col p-4 relative">
-  
-        {/* BRAND */}
-        <div className="absolute bottom-6 right-6 font-brand text-xl text-white/70 hover:text-white/90 transition-colors tracking-[0.35em] select-none">
-          TAWT
-        </div>
 
-  {/* CENTER CONTENT */}
-  <div className="flex flex-col items-center justify-center flex-1">
-        <ModeSelector activeMode={timer.mode} onModeChange={timer.switchMode} />
-        
-        <TimerDisplay time={timer.formatting} />
-        
-        <TimerControls 
-          isRunning={timer.running}
-          onToggle={timer.running ? timer.pause : timer.start}
-          onReset={timer.reset}
-          onSettings={openSettings}
-        />
-        
-        {/* Cycle Tracking UI */}
-        <div className="flex items-center gap-1.5 text-xs font-mono text-white/40 mt-6 mb-4 select-none">
-          <span>Cycles: {timer.cycleCount}</span>
-          <button
-            onClick={() => useTimerStore.setState({ cycleCount: 0 })}
-            className="hover:text-white transition-colors p-0.5"
-            title="Reset cycle count"
-          >
-            <RotateCcw size={12} />
-          </button>
-          <span>•</span>
-          <span>Next: {nextLabel}</span>
-        </div>
-        
-        {/* Task System Component (Dynamic & Decoupled) */}
-        <ActiveTask 
-          task={activeTask}
-          onComplete={completeTask}
-          onOpenPanel={() => setIsTaskPanelOpen(true)}
-        />
+      {/* BRAND */}
+      <div className="absolute bottom-6 right-6 font-brand text-md text-white/70 hover:text-white/90 transition-colors tracking-[0.35em] select-none">
+        TAWT
       </div>
 
-      <TaskPanel 
+      {/* CENTER CONTENT */}
+      <div className="flex flex-col items-center justify-center flex-1">
+
+        {/* MODE SELECTOR */}
+        <div>
+          <ModeSelector
+            activeMode={timer.mode}
+            onModeChange={timer.switchMode}
+          />
+        </div>
+
+        {/* TIMER */}
+        <div>
+          <TimerDisplay time={timer.formatting} />
+        </div>
+
+        {/* CONTROLS */}
+        <div className="mt-4">
+          <TimerControls
+            isRunning={timer.running}
+            onToggle={timer.running ? timer.pause : timer.start}
+            onReset={timer.reset}
+            onSettings={openSettings}
+          />
+        </div>
+
+        {/* CYCLE TRACKER */}
+        <div className="mt-6 mb-4 select-none">
+          <div className="mx-auto w-fit flex items-center gap-1 px-3 py-1 rounded-full bg-zinc-900/80 text-zinc-200 text-sm font-inter shadow-md shadow-black/40 backdrop-blur-sm sm:px-5 sm:py-1.5 sm:gap-2.5">
+            <span>Cycles: {timer.cycleCount}</span>
+            <button
+              onClick={() => useTimerStore.setState({ cycleCount: 0 })}
+              className="hover:text-white transition-colors p-0.5 cursor-pointer"
+              title="Reset cycle count"
+            >
+              <RotateCcw size={15} />
+            </button>
+            <span className="text-white/20 px-0.5 sm:px-1">•</span>
+            <span>Next: {nextLabel}</span>
+          </div>
+        </div>
+
+        {/* ACTIVE TASK */}
+        <div className="w-full max-w-sm mt-12 sm:mt-16">
+          <ActiveTask
+            task={activeTask}
+            onComplete={completeTask}
+            onOpenPanel={() => setIsTaskPanelOpen(true)}
+          />
+        </div>
+
+      </div>
+
+      <TaskPanel
         isOpen={isTaskPanelOpen}
         onClose={() => setIsTaskPanelOpen(false)}
       />
