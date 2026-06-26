@@ -36,31 +36,16 @@ export function FocusPage() {
       <div className="flex flex-col items-center justify-center flex-1">
 
         {/* MODE SELECTOR */}
-        <div>
+        <div className="order-1">
           <ModeSelector
             activeMode={timer.mode}
             onModeChange={timer.switchMode}
           />
         </div>
 
-        {/* TIMER */}
-        <div>
-          <TimerDisplay time={timer.formatting} />
-        </div>
-
-        {/* CONTROLS */}
-        <div className="mt-4">
-          <TimerControls
-            isRunning={timer.running}
-            onToggle={timer.running ? timer.pause : timer.start}
-            onReset={timer.reset}
-            onSettings={openSettings}
-          />
-        </div>
-
         {/* CYCLE TRACKER */}
-        <div className="mt-6 mb-4 select-none">
-          <div className="mx-auto w-fit flex items-center gap-1 px-3 py-1 rounded-full bg-zinc-900/80 text-zinc-200 text-sm font-inter shadow-md shadow-black/40 backdrop-blur-sm sm:px-5 sm:py-1.5 sm:gap-2.5">
+        <div className="order-2 sm:order-3 mt-6 mb-4 select-none">
+          <div className="mx-auto w-fit flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 md:bg-transparent text-zinc-200 text-xs md:text-sm font-inter shadow-md shadow-black/40 backdrop-blur-sm px-2.5 py-1 md:px-5 md:py-1.5 md:gap-2.5">
             <span>Cycles: {timer.cycleCount}</span>
             <button
               onClick={() => useTimerStore.setState({ cycleCount: 0 })}
@@ -74,8 +59,25 @@ export function FocusPage() {
           </div>
         </div>
 
+        {/* TIMER */}
+        <div className="order-3 sm:order-2">
+          <TimerDisplay time={timer.formatting} />
+        </div>
+
+
+        {/* CONTROLS */}
+        <div className="order-4 mt-8 sm:mt-4">
+          <TimerControls
+            isRunning={timer.running}
+            onToggle={timer.running ? timer.pause : timer.start}
+            onReset={timer.reset}
+            onSettings={openSettings}
+          />
+        </div>
+
+
         {/* ACTIVE TASK */}
-        <div className="w-full max-w-sm mt-12 sm:mt-16">
+        <div className="order-5 w-full max-w-sm mt-12 sm:mt-16">
           <ActiveTask
             task={activeTask}
             onComplete={completeTask}
