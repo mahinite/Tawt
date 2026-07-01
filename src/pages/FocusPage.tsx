@@ -15,6 +15,7 @@ import '../styles/branding.css';
 import { FocusLayout } from '../components/layout/FocusLayout';
 import { useLayoutMode } from "../hooks/useLayoutMode";
 
+
 export function FocusPage() {
   const timer = useTimer();
   const layoutMode = useLayoutMode();
