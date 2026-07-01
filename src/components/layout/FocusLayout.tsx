@@ -27,7 +27,7 @@ export function FocusLayout({
                 <div className="flex flex-col flex-1">
 
                     {/* Mode Region */}
-                    <div className="flex justify-center pt-18">
+                    <div className="flex justify-center pt-24">
                         {mode}
                     </div>
 
@@ -44,12 +44,12 @@ export function FocusLayout({
                     <div className="h-4" />
 
                     {/* Action Region */}
-                    <div className="flex justify-center pb-18">
+                    <div className="flex justify-center pb-22">
                         {controls}
                     </div>
 
                     {/* Task Region */}
-                    <div className="flex justify-center pb-24">
+                    <div className="flex justify-center pb-28">
                         {task}
                     </div>
 
