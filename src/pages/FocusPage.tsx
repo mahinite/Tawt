@@ -25,7 +25,12 @@ export function FocusPage() {
     : 'Pomodoro';
 
   return (
-    <main className="min-h-screen bg-black text-white flex flex-col p-4 relative">
+    <main
+      className="bg-black text-white flex flex-col p-4 relative"
+      style={{
+        height: "100dvh",
+      }}
+    >
 
       {/* BRAND */}
       <div className="absolute bottom-6 right-6 font-brand text-md text-white/70 hover:text-white/90 transition-colors tracking-[0.35em] select-none">
