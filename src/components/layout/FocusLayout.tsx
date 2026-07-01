@@ -24,46 +24,152 @@ export function FocusLayout({
 
         case "compact":
             return (
-                <div className="flex flex-col items-center justify-center flex-1 gap-3">
-                    {mode}
-                    {cycle}
-                    {timer}
-                    {controls}
-                    {task}
+                <div className="flex flex-col flex-1">
+
+                    {/* Mode Region */}
+                    <div className="flex justify-center pt-8">
+                        {mode}
+                    </div>
+
+                    {/* Region Spacer */}
+                    <div className="h-5" />
+
+                    {/* Timer Region */}
+                    <div className="flex flex-col items-center justify-center flex-1 gap-6">
+                        {timer}
+                        {cycle}
+                    </div>
+
+                    {/* Region Spacer */}
+                    <div className="h-3" />
+
+                    {/* Action Region */}
+                    <div className="flex justify-center pb-12">
+                        {controls}
+                    </div>
+
+                    {/* Task Region */}
+                    <div className="flex justify-center pb-16">
+                        {task}
+                    </div>
+
+                    {/* Utility Region */}
+                    <div>
+                        {/* Reserved for branding, audio, future utilities */}
+                    </div>
+
                 </div>
             );
 
         case "regular":
             return (
-                <div className="flex flex-col items-center justify-center flex-1 gap-4">
-                    {mode}
-                    {timer}
-                    {cycle}
-                    {controls}
-                    {task}
+                <div className="flex flex-col flex-1">
+
+                    {/* Mode Region */}
+                    <div className="flex justify-center pt-16">
+                        {mode}
+                    </div>
+
+                    {/* Region Spacer */}
+                    <div className="h-8" />
+
+                    {/* Timer Region */}
+                    <div className="flex flex-col items-center justify-center flex-1 gap-6">
+                        {timer}
+                        {cycle}
+                    </div>
+
+                    {/* Region Spacer */}
+                    <div className="h-6" />
+
+                    {/* Action Region */}
+                    <div className="flex justify-center pb-16">
+                        {controls}
+                    </div>
+
+                    {/* Task Region */}
+                    <div className="flex justify-center pb-20">
+                        {task}
+                    </div>
+
+                    {/* Utility Region */}
+                    <div />
+
                 </div>
             );
 
         case "wide":
             return (
-                <div className="flex flex-col items-center justify-center flex-1 gap-5">
-                    {mode}
-                    {timer}
-                    {cycle}
-                    {controls}
-                    {task}
+                <div className="flex flex-col flex-1">
+
+                    {/* Mode Region */}
+                    <div className="flex justify-center pt-24">
+                        {mode}
+                    </div>
+
+                    {/* Region Spacer */}
+                    <div className="h-8" />
+
+                    {/* Timer Region */}
+                    <div className="flex flex-col items-center justify-center flex-1 gap-7">
+                        {timer}
+                        {cycle}
+                    </div>
+
+                    {/* Region Spacer */}
+                    <div className="h-6" />
+
+                    {/* Action Region */}
+                    <div className="flex justify-center pb-15">
+                        {controls}
+                    </div>
+
+                    {/* Task Region */}
+                    <div className="flex justify-center pb-24">
+                        {task}
+                    </div>
+
+                    {/* Utility Region */}
+                    <div />
+
                 </div>
             );
 
         case "ultrawide":
         default:
             return (
-                <div className="flex flex-col items-center justify-center flex-1 gap-6">
-                    {mode}
-                    {timer}
-                    {cycle}
-                    {controls}
-                    {task}
+                <div className="flex flex-col flex-1">
+
+                    {/* Mode Region */}
+                    <div className="flex justify-center pt-40">
+                        {mode}
+                    </div>
+
+                    {/* Region Spacer */}
+                    <div className="h-10" />
+
+                    {/* Timer Region */}
+                    <div className="flex flex-col items-center justify-center flex-1 gap-6">
+                        {timer}
+                        {cycle}
+                    </div>
+
+                    {/* Region Spacer */}
+                    <div className="h-6" />
+
+                    {/* Action Region */}
+                    <div className="flex justify-center pb-10">
+                        {controls}
+                    </div>
+
+                    {/* Task Region */}
+                    <div className="flex justify-center pb-58">
+                        {task}
+                    </div>
+
+                    {/* Utility Region */}
+                    <div />
+
                 </div>
             );
     }
