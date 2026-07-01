@@ -26,9 +26,13 @@ export function FocusPage() {
 
   return (
     <main
-      className="bg-black text-white flex flex-col p-4 relative"
+      className="bg-black text-white flex flex-col relative"
       style={{
         height: "100dvh",
+        paddingTop: "max(1rem, env(safe-area-inset-top))",
+        paddingBottom: "max(1rem, env(safe-area-inset-bottom))",
+        paddingLeft: "max(1rem, env(safe-area-inset-left))",
+        paddingRight: "max(1rem, env(safe-area-inset-right))",
       }}
     >
 
