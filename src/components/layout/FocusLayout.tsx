@@ -41,15 +41,15 @@ export function FocusLayout({
                     </div>
 
                     {/* Region Spacer */}
-                    <div className="h-3" />
+                    <div className="h-4" />
 
                     {/* Action Region */}
-                    <div className="flex justify-center pb-12">
+                    <div className="flex justify-center pb-18">
                         {controls}
                     </div>
 
                     {/* Task Region */}
-                    <div className="flex justify-center pb-16">
+                    <div className="flex justify-center pb-18">
                         {task}
                     </div>
 
