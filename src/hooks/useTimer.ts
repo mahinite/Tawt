@@ -15,7 +15,7 @@ export function useTimer() {
   useEffect(() => {
     // Only sync if timer hasn't been initialized properly or is paused
     if (!timerState.running && timerState.remainingSeconds === 0) {
-       timerEngine.syncWithSettings();
+      timerEngine.syncWithSettings();
     }
   }, [timerState.running, timerState.remainingSeconds]);
 
@@ -33,6 +33,7 @@ export function useTimer() {
     start: () => timerEngine.start(),
     pause: () => timerEngine.pause(),
     reset: () => timerEngine.reset(),
+    skip: () => timerEngine.skip(),
     switchMode: (mode: TimerMode) => timerEngine.switchMode(mode),
   };
 }

@@ -23,22 +23,22 @@ export class TimerEngine {
     this.deps = deps;
   }
 
-public start(): void {
-  const state = this.deps.getTimerState();
-  if (state.running || state.remainingSeconds <= 0) return;
+  public start(): void {
+    const state = this.deps.getTimerState();
+    if (state.running || state.remainingSeconds <= 0) return;
 
-  const now = Date.now();
+    const now = Date.now();
 
-  this.deps.setTimerState({
-    running: true,
-    startTimestamp: now,
-    endTimestamp: now + state.remainingSeconds * 1000
-  });
+    this.deps.setTimerState({
+      running: true,
+      startTimestamp: now,
+      endTimestamp: now + state.remainingSeconds * 1000
+    });
 
-  this.intervalId = (globalThis as any).setInterval(() => {
-    this.tick();
-  }, 250) as number;
-}
+    this.intervalId = (globalThis as any).setInterval(() => {
+      this.tick();
+    }, 250) as number;
+  }
 
   public pause(): void {
     this.deps.setTimerState({ running: false });
@@ -56,42 +56,50 @@ public start(): void {
     this.applyMode(mode);
   }
 
+  public skip(): void {
+    this.completeCurrentSession(false);
+  }
+
   public syncWithSettings(): void {
     const state = this.deps.getTimerState();
     if (!state.running) {
-       this.applyMode(state.mode);
+      this.applyMode(state.mode);
     }
   }
 
   private tick(): void {
-  const state = this.deps.getTimerState();
+    const state = this.deps.getTimerState();
 
-  if (!state.running || this.isProcessingComplete) {
-    return;
-        }
+    if (!state.running || this.isProcessingComplete) {
+      return;
+    }
 
-        const now = Date.now();
-        const remaining = Math.max(
-          0,
-          Math.floor((state.endTimestamp! - now) / 1000)
-        );
+    const now = Date.now();
+    const remaining = Math.max(
+      0,
+      Math.floor((state.endTimestamp! - now) / 1000)
+    );
 
-        this.deps.setTimerState({
-          remainingSeconds: remaining
-        });
+    this.deps.setTimerState({
+      remainingSeconds: remaining
+    });
 
-        if (state.mode === 'pomodoro') {
-          this.deps.onPomodoroTick();
-        }
+    if (state.mode === 'pomodoro') {
+      this.deps.onPomodoroTick();
+    }
 
-        if (remaining <= 0) {
-          this.handleSessionComplete();
-        }
-        }
+    if (remaining <= 0) {
+      this.handleSessionComplete();
+    }
+  }
 
   private handleSessionComplete(): void {
+    this.completeCurrentSession(true);
+  }
+
+  private completeCurrentSession(playSound: boolean): void {
     this.isProcessingComplete = true; // Lock
-    
+
     // 1. Immediately pause and clear the timer to prevent double-trigger loops
     this.pause();
     this.deps.setTimerState({ remainingSeconds: 0 });
@@ -100,7 +108,7 @@ public start(): void {
     const settings = this.deps.getSettings();
 
     // 2. Play sound if enabled
-    if (settings.soundEnabled) {
+    if (playSound && settings.soundEnabled) {
       try {
         const AudioContextClass = (globalThis as any).AudioContext || (globalThis as any).webkitAudioContext;
         if (AudioContextClass) {
@@ -138,7 +146,7 @@ public start(): void {
         nextMode = 'shortBreak';
       }
       autoStart = settings.autoStartBreak;
-      
+
     } else {
       nextMode = 'pomodoro';
       autoStart = settings.autoStartPomodoro;
@@ -147,7 +155,7 @@ public start(): void {
 
     // Apply next mode
     this.applyMode(nextMode);
-    
+
     this.isProcessingComplete = false; // Unlock
 
     if (autoStart) {
@@ -173,16 +181,16 @@ public start(): void {
   }
 
   private applyMode(mode: TimerMode): void {
-  const settings = this.deps.getSettings();
-  const durationSeconds = this.getDurationForMode(mode, settings) * 60;
+    const settings = this.deps.getSettings();
+    const durationSeconds = this.getDurationForMode(mode, settings) * 60;
 
-  this.deps.setTimerState({
-    mode,
-    remainingSeconds: durationSeconds,
-    running: false,
+    this.deps.setTimerState({
+      mode,
+      remainingSeconds: durationSeconds,
+      running: false,
 
-    startTimestamp: null,
-    endTimestamp: null,
+      startTimestamp: null,
+      endTimestamp: null,
     });
   }
 }

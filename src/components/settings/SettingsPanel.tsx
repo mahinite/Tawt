@@ -14,9 +14,9 @@ export function SettingsPanel() {
   const [tempPomodoro, setTempPomodoro] = React.useState<string | number>(settings.pomodoroLength);
   const [tempShortBreak, setTempShortBreak] = React.useState<string | number>(settings.shortBreakLength);
   const [tempLongBreak, setTempLongBreak] = React.useState<string | number>(settings.longBreakLength);
-const [tempLongBreakInterval, setTempLongBreakInterval] = React.useState<string>(
-  String(settings.longBreakInterval)
-);
+  const [tempLongBreakInterval, setTempLongBreakInterval] = React.useState<string>(
+    String(settings.longBreakInterval)
+  );
 
   const settingsRef = useRef<HTMLDivElement>(null);
   useClickOutside(settingsRef, closeSettings);
@@ -32,14 +32,14 @@ const [tempLongBreakInterval, setTempLongBreakInterval] = React.useState<string>
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isSettingsOpen, closeSettings]);
 
-useEffect(() => {
-  if (!isSettingsOpen) return;
+  useEffect(() => {
+    if (!isSettingsOpen) return;
 
-  setTempPomodoro(settings.pomodoroLength);
-  setTempShortBreak(settings.shortBreakLength);
-  setTempLongBreak(settings.longBreakLength);
-  setTempLongBreakInterval(String(settings.longBreakInterval));
-}, [isSettingsOpen]);
+    setTempPomodoro(settings.pomodoroLength);
+    setTempShortBreak(settings.shortBreakLength);
+    setTempLongBreak(settings.longBreakLength);
+    setTempLongBreakInterval(String(settings.longBreakInterval));
+  }, [isSettingsOpen]);
 
   if (!isSettingsOpen) return null;
 
@@ -47,7 +47,7 @@ useEffect(() => {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-fade-in">
       {/* Panel Container */}
       <div ref={settingsRef} className="w-full max-w-[420px] bg-[#0A0A0A] border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[85vh] rounded-[32px]">
-        
+
         {/* Header */}
         <div className="px-6 py-6 border-b border-white/5 flex items-center justify-between shrink-0">
           <h2 className="text-xl font-medium tracking-tight text-white">Settings</h2>
@@ -70,24 +70,24 @@ useEffect(() => {
                 <input
                   type="number"
                   min="1"
-                   max="90"
+                  max="90"
                   value={tempPomodoro}
-                          onChange={(e) => setTempPomodoro(e.target.value)}
-                          onBlur={() => {
-                            const val = parseInt(tempPomodoro, 10);
+                  onChange={(e) => setTempPomodoro(e.target.value)}
+                  onBlur={() => {
+                    const val = parseInt(tempPomodoro, 10);
 
-                            const safe = isNaN(val)
-                              ? 1
-                              : Math.min(90, Math.max(1, val));
+                    const safe = isNaN(val)
+                      ? 1
+                      : Math.min(90, Math.max(1, val));
 
-                            setTempPomodoro(String(safe));
-                            settings.updateSettings({ pomodoroLength: safe });
-                          }}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                              (e.target as HTMLInputElement).blur();
-                            }
-                          }}
+                    setTempPomodoro(String(safe));
+                    settings.updateSettings({ pomodoroLength: safe });
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      (e.target as HTMLInputElement).blur();
+                    }
+                  }}
                   className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
                 />
               </div>
@@ -96,24 +96,24 @@ useEffect(() => {
                 <input
                   type="number"
                   min="1"
-                   max="90"
-                 value={tempShortBreak}
-                    onChange={(e) => setTempShortBreak(e.target.value)}
-                    onBlur={() => {
-                      const val = parseInt(tempShortBreak, 10);
+                  max="90"
+                  value={tempShortBreak}
+                  onChange={(e) => setTempShortBreak(e.target.value)}
+                  onBlur={() => {
+                    const val = parseInt(tempShortBreak, 10);
 
-                      const safe = isNaN(val)
-                        ? 1
-                        : Math.min(90, Math.max(1, val));
+                    const safe = isNaN(val)
+                      ? 1
+                      : Math.min(90, Math.max(1, val));
 
-                      setTempShortBreak(String(safe));
-                      settings.updateSettings({ shortBreakLength: safe });
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        (e.target as HTMLInputElement).blur();
-                      }
-                    }}
+                    setTempShortBreak(String(safe));
+                    settings.updateSettings({ shortBreakLength: safe });
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      (e.target as HTMLInputElement).blur();
+                    }
+                  }}
                   className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
                 />
               </div>
@@ -122,24 +122,24 @@ useEffect(() => {
                 <input
                   type="number"
                   min="1"
-                   max="90"
+                  max="90"
                   value={tempLongBreak}
-                        onChange={(e) => setTempLongBreak(e.target.value)}
-                        onBlur={() => {
-                          const val = parseInt(tempLongBreak, 10);
+                  onChange={(e) => setTempLongBreak(e.target.value)}
+                  onBlur={() => {
+                    const val = parseInt(tempLongBreak, 10);
 
-                          const safe = isNaN(val)
-                            ? 1
-                            : Math.min(90, Math.max(1, val));
+                    const safe = isNaN(val)
+                      ? 1
+                      : Math.min(90, Math.max(1, val));
 
-                          setTempLongBreak(String(safe));
-                          settings.updateSettings({ longBreakLength: safe });
-                        }}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter") {
-                            (e.target as HTMLInputElement).blur();
-                          }
-                        }}
+                    setTempLongBreak(String(safe));
+                    settings.updateSettings({ longBreakLength: safe });
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      (e.target as HTMLInputElement).blur();
+                    }
+                  }}
                   className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
                 />
               </div>
@@ -152,26 +152,26 @@ useEffect(() => {
             <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-2xl p-4">
               <span className="text-sm text-white/80">Long break interval</span>
               <input
-                  type="number"
-                  min="0"
-                  value={tempLongBreakInterval}
-                  onChange={(e) => setTempLongBreakInterval(e.target.value)}
-                  onBlur={() => {
-                    const val = parseInt(tempLongBreakInterval, 10);
+                type="number"
+                min="0"
+                value={tempLongBreakInterval}
+                onChange={(e) => setTempLongBreakInterval(e.target.value)}
+                onBlur={() => {
+                  const val = parseInt(tempLongBreakInterval, 10);
 
-                    const safe = isNaN(val) || val < 0 ? 0 : val;
+                  const safe = isNaN(val) || val < 0 ? 0 : val;
 
-                    setTempLongBreakInterval(String(safe));
+                  setTempLongBreakInterval(String(safe));
 
-                    settings.updateSettings({
-                      longBreakInterval: safe
-                    });
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      (e.target as HTMLInputElement).blur();
-                    }
-                  }}
+                  settings.updateSettings({
+                    longBreakInterval: safe
+                  });
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    (e.target as HTMLInputElement).blur();
+                  }
+                }}
                 className="w-16 bg-white/5 border border-white/10 rounded-xl px-2 py-1 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
               />
             </div>
@@ -180,7 +180,7 @@ useEffect(() => {
           {/* Section: Options & Toggles */}
           <div className="space-y-4 pt-4 border-t border-white/5">
             <h3 className="text-xs font-semibold tracking-wider text-white/30 uppercase">Options</h3>
-            
+
             <div className="space-y-3">
               <label className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-2xl cursor-pointer hover:bg-white/10 transition-colors">
                 <span className="text-sm text-white/80">Auto start breaks</span>

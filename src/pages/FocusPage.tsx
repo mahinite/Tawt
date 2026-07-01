@@ -10,7 +10,7 @@ import { SettingsPanel } from '../components/settings/SettingsPanel';
 import { useUIStore } from '../store/uiStore';
 import { useSettingsStore } from '../store/settingsStore';
 import { useTimerStore } from '../store/timerStore';
-import { RotateCcw } from 'lucide-react';
+import { RotateCcw, MoreVertical } from 'lucide-react';
 import '../styles/branding.css';
 import { FocusLayout } from '../components/layout/FocusLayout';
 import { useLayoutMode } from "../hooks/useLayoutMode";
@@ -39,6 +39,17 @@ export function FocusPage() {
         paddingRight: "max(1rem, env(safe-area-inset-right))",
       }}
     >
+      {/* MORE MENU */}
+      <div className="absolute top-6 right-6 z-20">
+        <button
+          onClick={openSettings}
+          className="p-2.5 rounded-full hover:bg-white/10 transition-colors text-white/60 hover:text-white"
+          aria-label="More"
+          title="More"
+        >
+          <MoreVertical size={22} />
+        </button>
+      </div>
 
       <FocusLayout
         layoutMode={layoutMode}
@@ -80,7 +91,7 @@ export function FocusPage() {
             isRunning={timer.running}
             onToggle={timer.running ? timer.pause : timer.start}
             onReset={timer.reset}
-            onSettings={openSettings}
+            onSkip={timer.skip}
           />
         }
 
