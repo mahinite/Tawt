@@ -12,6 +12,7 @@ import { useSettingsStore } from '../store/settingsStore';
 import { useTimerStore } from '../store/timerStore';
 import { RotateCcw } from 'lucide-react';
 import '../styles/branding.css';
+import { FocusLayout } from '../components/layout/FocusLayout';
 
 export function FocusPage() {
   const timer = useTimer();
@@ -36,64 +37,63 @@ export function FocusPage() {
       }}
     >
 
-      {/* BRAND */}
-      <div className="absolute bottom-6 right-6 font-brand text-md text-white/70 hover:text-white/90 transition-colors tracking-[0.35em] select-none">
-        TAWT
-      </div>
-
-      {/* CENTER CONTENT */}
-      <div className="flex flex-col items-center justify-center flex-1">
-
-        {/* MODE SELECTOR */}
-        <div className="order-1">
+      <FocusLayout
+        mode={
           <ModeSelector
             activeMode={timer.mode}
             onModeChange={timer.switchMode}
           />
-        </div>
+        }
 
-        {/* CYCLE TRACKER */}
-        <div className="order-2 sm:order-3 mt-6 mb-4 select-none">
-          <div className="mx-auto w-fit flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 md:bg-transparent text-zinc-200 text-xs md:text-sm font-inter shadow-md shadow-black/40 backdrop-blur-sm px-2.5 py-1 md:px-5 md:py-1.5 md:gap-2.5">
-            <span>Cycles: {timer.cycleCount}</span>
-            <button
-              onClick={() => useTimerStore.setState({ cycleCount: 0 })}
-              className="hover:text-white transition-colors p-0.5 cursor-pointer"
-              title="Reset cycle count"
-            >
-              <RotateCcw size={15} />
-            </button>
-            <span className="text-white/20 px-0.5 sm:px-1">•</span>
-            <span>Next: {nextLabel}</span>
+        cycle={
+          <div className="select-none">
+            <div className="mx-auto w-fit flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 md:bg-transparent text-zinc-200 text-xs md:text-sm font-inter shadow-md shadow-black/40 backdrop-blur-sm md:px-5 md:py-1.5 md:gap-2.5">
+              <span>Cycles: {timer.cycleCount}</span>
+
+              <button
+                onClick={() => useTimerStore.setState({ cycleCount: 0 })}
+                className="hover:text-white transition-colors p-0.5 cursor-pointer"
+                title="Reset cycle count"
+              >
+                <RotateCcw size={15} />
+              </button>
+
+              <span className="text-white/20 px-0.5 sm:px-1">•</span>
+
+              <span>
+                Next: {nextLabel}
+              </span>
+            </div>
           </div>
-        </div>
+        }
 
-        {/* TIMER */}
-        <div className="order-3 sm:order-2">
+        timer={
           <TimerDisplay time={timer.formatting} />
-        </div>
+        }
 
-
-        {/* CONTROLS */}
-        <div className="order-4 mt-8 sm:mt-4">
+        controls={
           <TimerControls
             isRunning={timer.running}
             onToggle={timer.running ? timer.pause : timer.start}
             onReset={timer.reset}
             onSettings={openSettings}
           />
-        </div>
+        }
 
+        task={
+          <div className="w-full max-w-sm">
+            <ActiveTask
+              task={activeTask}
+              onComplete={completeTask}
+              onOpenPanel={() => setIsTaskPanelOpen(true)}
+            />
+          </div>
+        }
+      />
 
-        {/* ACTIVE TASK */}
-        <div className="order-5 w-full max-w-sm mt-12 sm:mt-16">
-          <ActiveTask
-            task={activeTask}
-            onComplete={completeTask}
-            onOpenPanel={() => setIsTaskPanelOpen(true)}
-          />
-        </div>
-
+      {/* BRAND */}
+      <div className="absolute bottom-6 right-6 font-brand text-md text-white/70 hover:text-white/90 transition-colors tracking-[0.35em] select-none">
+        TAWT
       </div>
 
       <TaskPanel

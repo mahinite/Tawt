@@ -13,7 +13,7 @@ export function ActiveTask({ task, onComplete, onOpenPanel }: ActiveTaskProps) {
     return (
       <div
         onClick={onOpenPanel}
-        className="mt-16 w-full max-w-sm px-6 py-4 rounded-2xl border border-dashed border-white/20 text-white/50 text-center cursor-pointer hover:border-white/40 hover:text-white/80 transition-colors select-none"
+        className="w-full max-w-sm px-6 py-4 rounded-2xl border border-dashed border-white/20 text-white/50 text-center cursor-pointer hover:border-white/40 hover:text-white/80 transition-colors select-none"
       >
         Click to select a task...
       </div>

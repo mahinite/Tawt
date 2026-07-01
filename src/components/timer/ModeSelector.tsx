@@ -14,7 +14,7 @@ export function ModeSelector({ activeMode, onModeChange }: ModeSelectorProps) {
   ];
 
   return (
-    <div className="flex items-center justify-center gap-2 flex-nowrap -mt-40 sm:mt-0">
+    <div className="flex items-center justify-center gap-2 flex-nowrap">
       {modes.map((mode) => (
         <button
           key={mode.id}
