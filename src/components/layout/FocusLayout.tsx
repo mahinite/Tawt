@@ -1,6 +1,9 @@
 import React from "react";
+import type { LayoutMode } from "../../hooks/useLayoutMode";
 
 interface FocusLayoutProps {
+    layoutMode: LayoutMode;
+
     mode: React.ReactNode;
     cycle: React.ReactNode;
     timer: React.ReactNode;
@@ -9,39 +12,59 @@ interface FocusLayoutProps {
 }
 
 export function FocusLayout({
+    layoutMode,
     mode,
     cycle,
     timer,
     controls,
     task,
 }: FocusLayoutProps) {
-    return (
-        <div
-            className="
-            focus-layout
-            flex
-            flex-col
-            items-center
-            justify-center
-            flex-1
 
-            gap-6
-            max-[850px]:gap-5
-            max-[750px]:gap-4
-            max-[650px]:gap-3
-        "
-        >
+    switch (layoutMode) {
 
-            {mode}
+        case "compact":
+            return (
+                <div className="flex flex-col items-center justify-center flex-1 gap-3">
+                    {mode}
+                    {cycle}
+                    {timer}
+                    {controls}
+                    {task}
+                </div>
+            );
 
-            {cycle}
+        case "regular":
+            return (
+                <div className="flex flex-col items-center justify-center flex-1 gap-4">
+                    {mode}
+                    {timer}
+                    {cycle}
+                    {controls}
+                    {task}
+                </div>
+            );
 
-            {timer}
+        case "wide":
+            return (
+                <div className="flex flex-col items-center justify-center flex-1 gap-5">
+                    {mode}
+                    {timer}
+                    {cycle}
+                    {controls}
+                    {task}
+                </div>
+            );
 
-            {controls}
-
-            {task}
-
-        </div>
-    );
+        case "ultrawide":
+        default:
+            return (
+                <div className="flex flex-col items-center justify-center flex-1 gap-6">
+                    {mode}
+                    {timer}
+                    {cycle}
+                    {controls}
+                    {task}
+                </div>
+            );
+    }
 }

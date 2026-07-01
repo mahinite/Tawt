@@ -13,9 +13,11 @@ import { useTimerStore } from '../store/timerStore';
 import { RotateCcw } from 'lucide-react';
 import '../styles/branding.css';
 import { FocusLayout } from '../components/layout/FocusLayout';
+import { useLayoutMode } from "../hooks/useLayoutMode";
 
 export function FocusPage() {
   const timer = useTimer();
+  const layoutMode = useLayoutMode();
   const { activeTask, completeTask } = useTasks();
   const [isTaskPanelOpen, setIsTaskPanelOpen] = useState(false);
   const openSettings = useUIStore(state => state.openSettings);
@@ -38,6 +40,7 @@ export function FocusPage() {
     >
 
       <FocusLayout
+        layoutMode={layoutMode}
         mode={
           <ModeSelector
             activeMode={timer.mode}
