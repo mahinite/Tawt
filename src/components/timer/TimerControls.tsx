@@ -19,7 +19,7 @@ export function TimerControls({
       className="
     flex items-center justify-center
 
-    px-6 py-3.5
+    px-3.25 py-2.5
 
     rounded-full
 
@@ -27,7 +27,7 @@ export function TimerControls({
     backdrop-blur-md
 
     border border-white/[0.10]
-
+    border-2
     shadow-[0_8px_30px_rgba(0,0,0,0.25)]
   "
     >
@@ -55,11 +55,11 @@ export function TimerControls({
       <button
         onClick={onToggle}
         className="
-  px-7 py-5
+  px-6 py-5
 
   rounded-full
 
-  bg-white/[0.04]
+  bg-white/[0.1]
   border border-white/[0.10]
 
   text-white

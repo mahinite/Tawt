@@ -46,7 +46,7 @@ export function SettingsPanel() {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-fade-in">
       {/* Panel Container */}
-      <div ref={settingsRef} className="w-full max-w-[420px] bg-[#0A0A0A] border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[85vh] rounded-[32px]">
+      <div ref={settingsRef} className="w-full max-w-[420px] bg-[#0A0A0A] border border-white/25 shadow-2xl overflow-hidden flex flex-col max-h-[85vh] rounded-[32px]">
 
         {/* Header */}
         <div className="px-6 py-6 border-b border-white/5 flex items-center justify-between shrink-0">
@@ -63,7 +63,7 @@ export function SettingsPanel() {
         <div className="flex-1 overflow-y-auto px-6 py-6 pb-6 space-y-6 scrollbar-hide">
           {/* Section: Durations */}
           <div className="space-y-4">
-            <h3 className="text-xs font-semibold tracking-wider text-white/30 uppercase">Durations (minutes)</h3>
+            <h3 className="text-xs font-semibold tracking-wider text-white/40 uppercase">Durations (minutes)</h3>
             <div className="grid grid-cols-3 gap-3">
               <div className="flex flex-col gap-2">
                 <label className="text-xs text-white/60 font-medium">Work</label>
@@ -148,7 +148,7 @@ export function SettingsPanel() {
 
           {/* Section: Cycles */}
           <div className="space-y-4 pt-4 border-t border-white/5">
-            <h3 className="text-xs font-semibold tracking-wider text-white/30 uppercase">Cycles</h3>
+            <h3 className="text-xs font-semibold tracking-wider text-white/40 uppercase">Cycles</h3>
             <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-2xl p-4">
               <span className="text-sm text-white/80">Long break interval</span>
               <input
@@ -179,7 +179,7 @@ export function SettingsPanel() {
 
           {/* Section: Options & Toggles */}
           <div className="space-y-4 pt-4 border-t border-white/5">
-            <h3 className="text-xs font-semibold tracking-wider text-white/30 uppercase">Options</h3>
+            <h3 className="text-xs font-semibold tracking-wider text-white/40 uppercase">Options</h3>
 
             <div className="space-y-3">
               <label className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-2xl cursor-pointer hover:bg-white/10 transition-colors">
@@ -218,7 +218,7 @@ export function SettingsPanel() {
 
           {/* Section: What's New */}
           <div className="space-y-4 pt-4 border-t border-white/5">
-            <h3 className="text-xs font-semibold tracking-wider text-white/30 uppercase">What's New</h3>
+            <h3 className="text-xs font-semibold tracking-wider text-white/40 uppercase">What's New</h3>
             <div className="space-y-6">
               {CHANGELOG.map(entry => (
                 <div key={entry.version} className="space-y-2 opacity-90 hover:opacity-100 transition-opacity">

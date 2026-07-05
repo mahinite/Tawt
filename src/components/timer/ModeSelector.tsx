@@ -24,7 +24,7 @@ export function ModeSelector({ activeMode, onModeChange }: ModeSelectorProps) {
             text-[0.8rem] min-[420px]:text-[0.9rem] sm:text-[1rem] md:text-[1rem]
             rounded-full font-medium transition-colors ${activeMode === mode.id
               ? 'bg-white text-black'
-              : 'bg-transparent text-white/60 hover:text-white border border-white/20 hover:border-white/40'
+              : 'bg-transparent text-white/80 hover:text-white border border-white/40 hover:border-white/60'
             }`}
         >
           {mode.label}

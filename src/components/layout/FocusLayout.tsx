@@ -27,7 +27,7 @@ export function FocusLayout({
                 <div className="flex flex-col flex-1">
 
                     {/* Mode Region */}
-                    <div className="flex justify-center pt-24">
+                    <div className="flex justify-center pt-20">
                         {mode}
                     </div>
 

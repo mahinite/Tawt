@@ -1,9 +1,10 @@
-import {StrictMode} from 'react';
-import {createRoot} from 'react-dom/client';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import { initTaskEngineAdapter } from './store/taskAdapter';
 import { registerSW } from 'virtual:pwa-register';
+import "@fontsource/geist-mono/700.css";
 
 // Register service worker for offline support.
 // autoUpdate: SW installs in background without user interaction.

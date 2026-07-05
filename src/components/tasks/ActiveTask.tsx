@@ -13,9 +13,9 @@ export function ActiveTask({ task, onComplete, onOpenPanel }: ActiveTaskProps) {
     return (
       <div
         onClick={onOpenPanel}
-        className="w-full max-w-sm px-6 py-4 rounded-2xl border border-dashed border-white/20 text-white/50 text-center cursor-pointer hover:border-white/40 hover:text-white/80 transition-colors select-none"
+        className="w-full max-w-sm px-6 py-4 rounded-2xl border border-dashed border-white/30 text-white/70 text-center cursor-pointer hover:border-white/40 hover:text-white/80 transition-colors select-none"
       >
-        Click to select a task...
+        Click to create a task...
       </div>
     );
   }

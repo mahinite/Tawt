@@ -1,0 +1,9 @@
+:root {
+    --timer-font: "Sora", sans-serif;
+    --timer-font-weight: 600;
+}
+
+.font-timer {
+    font-family: var(--timer-font);
+    font-weight: calc(var(--timer-font-weight) * 1);
+}
