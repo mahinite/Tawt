@@ -59,7 +59,7 @@ export function TimerControls({
 
   rounded-full
 
-  bg-white/[0.1]
+  bg-white/[0.2]
   border border-white/[0.10]
 
   text-white
