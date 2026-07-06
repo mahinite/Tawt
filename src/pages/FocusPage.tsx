@@ -40,14 +40,14 @@ export function FocusPage() {
       }}
     >
       {/* MORE MENU */}
-      <div className="absolute top-6 right-6 z-20">
+      <div className="absolute top-5 right-6 z-20">
         <button
           onClick={openSettings}
-          className="p-2.5 rounded-full hover:bg-white/10 transition-colors text-white/60 hover:text-white"
+          className="p-5 rounded-full hover:bg-white/10 transition-colors text-white/75 hover:text-white"
           aria-label="More"
           title="More"
         >
-          <MoreVertical size={22} />
+          <MoreVertical size={23} />
         </button>
       </div>
 
