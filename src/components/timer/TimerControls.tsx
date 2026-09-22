@@ -19,7 +19,7 @@ export function TimerControls({
       className="
     flex items-center justify-center
 
-    px-3.25 py-2.5
+    px-ctl-x py-ctl-y
 
     rounded-full
 
@@ -35,7 +35,7 @@ export function TimerControls({
       <button
         onClick={onReset}
         className="
-  p-2.5
+  p-ctl-btn
 
   rounded-full
 
@@ -48,14 +48,13 @@ export function TimerControls({
 "
         aria-label="Reset Timer"
       >
-        <RotateCcw size={24} className="sm:hidden" />
-        <RotateCcw size={26} className="hidden sm:block" />
+        <RotateCcw className="size-ctl-icon" />
       </button>
-      <div className="w-5" />
+      <div className="w-ctl-gap" />
       <button
         onClick={onToggle}
         className="
-  px-6 py-5
+  px-ctl-main-x py-ctl-main-y
 
   rounded-full
 
@@ -74,23 +73,17 @@ export function TimerControls({
         aria-label={isRunning ? "Pause Timer" : "Start Timer"}
       >
         {isRunning ? (
-          <Pause size={32} className="sm:hidden" />
+          <Pause className="size-ctl-icon-main" />
         ) : (
-          <Play size={32} className="sm:hidden ml-0.5" />
-        )}
-
-        {isRunning ? (
-          <Pause size={32} className="hidden sm:block" />
-        ) : (
-          <Play size={32} className="hidden sm:block ml-0.5" />
+          <Play className="size-ctl-icon-main ml-0.5" />
         )}
       </button>
-      <div className="w-5" />
+      <div className="w-ctl-gap" />
 
       <button
         onClick={onSkip}
         className="
-  p-2.5
+  p-ctl-btn
 
   rounded-full
 
@@ -103,8 +96,7 @@ export function TimerControls({
 "
         aria-label="Skip"
       >
-        <SkipForward size={24} className="sm:hidden" />
-        <SkipForward size={26} className="hidden sm:block" />
+        <SkipForward className="size-ctl-icon" />
       </button>
     </div>
   );

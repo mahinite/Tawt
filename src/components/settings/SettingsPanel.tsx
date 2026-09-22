@@ -44,28 +44,28 @@ export function SettingsPanel() {
   if (!isSettingsOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-panel-inset bg-black/70 backdrop-blur-md animate-fade-in">
       {/* Panel Container */}
-      <div ref={settingsRef} className="w-full max-w-[420px] bg-[#0A0A0A] border border-white/25 shadow-2xl overflow-hidden flex flex-col max-h-[85vh] rounded-[32px]">
+      <div ref={settingsRef} className="w-full max-w-panel bg-[#0A0A0A] border border-white/25 shadow-2xl overflow-hidden flex flex-col max-h-panel-cap rounded-panel">
 
         {/* Header */}
-        <div className="px-6 py-6 border-b border-white/5 flex items-center justify-between shrink-0">
+        <div className="px-panel-x py-panel-y border-b border-white/5 flex items-center justify-between shrink-0">
           <h2 className="text-xl font-medium tracking-tight text-white">Settings</h2>
           <button
             onClick={closeSettings}
             className="p-2 rounded-full hover:bg-white/10 text-white/60 hover:text-white transition-colors"
           >
-            <X size={24} />
+            <X className="size-panel-icon-close" />
           </button>
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto px-6 py-6 pb-6 space-y-6 scrollbar-hide">
+        <div className="flex-1 overflow-y-auto px-panel-x py-panel-y space-y-panel-g-section scrollbar-hide">
           {/* Section: Durations */}
-          <div className="space-y-4">
+          <div className="space-y-panel-g-block">
             <h3 className="text-xs font-semibold tracking-wider text-white/40 uppercase">Durations (minutes)</h3>
-            <div className="grid grid-cols-3 gap-3">
-              <div className="flex flex-col gap-2">
+            <div className="grid grid-cols-3 gap-panel-g">
+              <div className="flex flex-col gap-panel-g-row">
                 <label className="text-xs text-white/60 font-medium">Work</label>
                 <input
                   type="number"
@@ -88,10 +88,10 @@ export function SettingsPanel() {
                       (e.target as HTMLInputElement).blur();
                     }
                   }}
-                  className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
+                  className="bg-white/5 border border-white/10 rounded-field px-field-x py-field-y text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
                 />
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-panel-g-row">
                 <label className="text-xs text-white/60 font-medium">Short Break</label>
                 <input
                   type="number"
@@ -114,10 +114,10 @@ export function SettingsPanel() {
                       (e.target as HTMLInputElement).blur();
                     }
                   }}
-                  className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
+                  className="bg-white/5 border border-white/10 rounded-field px-field-x py-field-y text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
                 />
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-panel-g-row">
                 <label className="text-xs text-white/60 font-medium">Long Break</label>
                 <input
                   type="number"
@@ -140,16 +140,16 @@ export function SettingsPanel() {
                       (e.target as HTMLInputElement).blur();
                     }
                   }}
-                  className="bg-white/5 border border-white/10 rounded-2xl px-3 py-2 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
+                  className="bg-white/5 border border-white/10 rounded-field px-field-x py-field-y text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
                 />
               </div>
             </div>
           </div>
 
           {/* Section: Cycles */}
-          <div className="space-y-4 pt-4 border-t border-white/5">
+          <div className="space-y-panel-g-block pt-panel-g-block border-t border-white/5">
             <h3 className="text-xs font-semibold tracking-wider text-white/40 uppercase">Cycles</h3>
-            <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-2xl p-4">
+            <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-field p-panel-row-pad">
               <span className="text-sm text-white/80">Long break interval</span>
               <input
                 type="number"
@@ -172,17 +172,17 @@ export function SettingsPanel() {
                     (e.target as HTMLInputElement).blur();
                   }
                 }}
-                className="w-16 bg-white/5 border border-white/10 rounded-xl px-2 py-1 text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
+                className="w-field-w-interval bg-white/5 border border-white/10 rounded-field-sm px-field-x-sm py-field-y-sm text-white focus:outline-none focus:border-white/30 transition-colors font-mono text-center text-sm"
               />
             </div>
           </div>
 
           {/* Section: Options & Toggles */}
-          <div className="space-y-4 pt-4 border-t border-white/5">
+          <div className="space-y-panel-g-block pt-panel-g-block border-t border-white/5">
             <h3 className="text-xs font-semibold tracking-wider text-white/40 uppercase">Options</h3>
 
-            <div className="space-y-3">
-              <label className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-2xl cursor-pointer hover:bg-white/10 transition-colors">
+            <div className="space-y-panel-g">
+              <label className="flex items-center justify-between p-panel-row-pad bg-white/5 border border-white/10 rounded-field cursor-pointer hover:bg-white/10 transition-colors">
                 <span className="text-sm text-white/80">Auto start breaks</span>
                 <Checkbox
                   checked={settings.autoStartBreak}
@@ -190,7 +190,7 @@ export function SettingsPanel() {
                 />
               </label>
 
-              <label className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-2xl cursor-pointer hover:bg-white/10 transition-colors">
+              <label className="flex items-center justify-between p-panel-row-pad bg-white/5 border border-white/10 rounded-field cursor-pointer hover:bg-white/10 transition-colors">
                 <span className="text-sm text-white/80">Auto start pomodoros</span>
                 <Checkbox
                   checked={settings.autoStartPomodoro}
@@ -198,7 +198,7 @@ export function SettingsPanel() {
                 />
               </label>
 
-              <label className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-2xl cursor-pointer hover:bg-white/10 transition-colors">
+              <label className="flex items-center justify-between p-panel-row-pad bg-white/5 border border-white/10 rounded-field cursor-pointer hover:bg-white/10 transition-colors">
                 <span className="text-sm text-white/80">Auto advance tasks</span>
                 <Checkbox
                   checked={settings.autoAdvanceTask}
@@ -206,7 +206,7 @@ export function SettingsPanel() {
                 />
               </label>
 
-              <label className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-2xl cursor-pointer hover:bg-white/10 transition-colors">
+              <label className="flex items-center justify-between p-panel-row-pad bg-white/5 border border-white/10 rounded-field cursor-pointer hover:bg-white/10 transition-colors">
                 <span className="text-sm text-white/80">Sound effects</span>
                 <Checkbox
                   checked={settings.soundEnabled}
@@ -217,11 +217,11 @@ export function SettingsPanel() {
           </div>
 
           {/* Section: What's New */}
-          <div className="space-y-4 pt-4 border-t border-white/5">
+          <div className="space-y-panel-g-block pt-panel-g-block border-t border-white/5">
             <h3 className="text-xs font-semibold tracking-wider text-white/40 uppercase">What's New</h3>
-            <div className="space-y-6">
+            <div className="space-y-panel-g-section">
               {CHANGELOG.map(entry => (
-                <div key={entry.version} className="space-y-2 opacity-90 hover:opacity-100 transition-opacity">
+                <div key={entry.version} className="space-y-panel-g-row opacity-90 hover:opacity-100 transition-opacity">
                   <div className="flex items-center justify-between">
                     <span className="text-white/80 text-sm font-medium">
                       {entry.title}
@@ -230,7 +230,7 @@ export function SettingsPanel() {
                       {entry.version}
                     </span>
                   </div>
-                  <ul className="pl-4 list-disc text-xs text-white/50 space-y-1">
+                  <ul className="pl-panel-indent list-disc text-xs text-white/50 space-y-1">
                     {entry.changes.map((c, i) => (
                       <li key={i}>{c}</li>
                     ))}
@@ -242,7 +242,7 @@ export function SettingsPanel() {
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-white/5 bg-[#0A0A0A] grid grid-cols-3 items-center shrink-0">
+        <div className="px-panel-x py-panel-y-sm border-t border-white/5 bg-[#0A0A0A] grid grid-cols-3 items-center shrink-0">
           <div />
           <span className="text-xs text-white/50 hover:text-white/80 transition-colors font-mono text-center">
             TAWT {APP_VERSION}

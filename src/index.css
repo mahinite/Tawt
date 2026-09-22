@@ -6,6 +6,107 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Page regions (FocusLayout) — fluid, width + height aware */
+  --spacing-region-top: clamp(5rem, min(calc(10vw + 1rem), 12dvh), 10rem);
+  --spacing-region-gap: clamp(1.25rem, min(calc(1.9vw + 0.8rem), 3dvh), 2.5rem);
+  --spacing-region-gap-cycle: clamp(1.5rem, min(2.5vw, 3dvh), 1.75rem);
+  --spacing-region-gap-tight: clamp(1.125rem, min(2vw, 2.5dvh), 1.5rem);
+  --spacing-region-gap-xs: clamp(0.25rem, min(1vw, 1.5dvh), 1rem);
+  --spacing-region-bottom-ctl: clamp(2.5rem, min(4vw, 6dvh), 4rem);
+  --spacing-region-bottom-task: clamp(6rem, min(calc(25vw - 10rem), 16dvh), 14.5rem);
+
+  /* Timer typography — single fluid token, both-axis aware */
+  --text-timer: clamp(6rem, min(calc(8.6vw + 4rem), 18dvh), 8rem);
+
+  /* Timer controls */
+  --spacing-ctl-x: clamp(0.75rem, min(2vw, 3dvh), 0.625rem);
+  --spacing-ctl-y: clamp(0.625rem, min(1.5vw, 2dvh), 0.625rem);
+  --spacing-ctl-btn: clamp(0.625rem, min(1.5vw, 2dvh), 0.625rem);
+  --spacing-ctl-main-x: clamp(1.5rem, min(3.5vw, 5dvh), 0.875rem);
+  --spacing-ctl-main-y: clamp(1.25rem, min(3vw, 4dvh), 0.875rem);
+  --spacing-ctl-gap: clamp(1rem, min(2vw, 3dvh), 1rem);
+  --spacing-ctl-icon: clamp(1.5rem, min(4vw, 5dvh), 1.625rem);
+  --spacing-ctl-icon-main: 2rem;
+
+  /* Mode selector pills */
+  --spacing-pill-x: clamp(1rem, min(2.5vw, 4dvh), 1rem);
+  --spacing-pill-y: clamp(0.6rem, min(1.5vw, 2.5dvh), 0.65rem);
+  --text-pill: clamp(0.8rem, min(2vw, 3dvh), 1rem);
+  --spacing-pill-gap: 0.5rem;
+
+  /* Cycle status badge (FocusPage) */
+  --spacing-status-x: clamp(0.75rem, min(2vw, 3dvh), 1.25rem);
+  --spacing-status-y: clamp(0.25rem, min(1vw, 1.5dvh), 0.375rem);
+  --text-status: clamp(0.75rem, min(1.5vw, 2.5dvh), 0.875rem);
+  --spacing-status-gap: clamp(0.25rem, min(1vw, 1.5dvh), 0.625rem);
+  --spacing-status-btn: 0.125rem;
+  --spacing-status-icon: 0.9375rem;
+  --spacing-status-dot: clamp(0.125rem, 0.5vw, 0.25rem);
+
+  /* Page chrome (FocusPage overlays) */
+  --spacing-chrome: 1.25rem;
+  --spacing-chrome-x: 0.875rem;
+  --spacing-brand-y: 1.5rem;
+  --spacing-brand-x: 1.5rem;
+  --text-brand: 1rem;
+  --tracking-brand: 0.35em;
+  --spacing-chrome-icon: 1.4375rem;
+
+  /* Modal panels (Task + Settings) */
+  --spacing-panel-inset: clamp(1rem, min(2.5vw, 3dvh), 2rem);
+  --container-panel: min(92vw, 26.25rem);
+  --spacing-panel-cap: 85dvh;
+  --spacing-panel-x: clamp(1rem, min(2.5vw, 3dvh), 1.5rem);
+  --spacing-panel-y: clamp(1.25rem, min(2.5vw, 3dvh), 1.5rem);
+  --spacing-panel-pad: 1.5rem;
+  --radius-panel: clamp(1rem, 2.5vw, 2rem);
+  --spacing-panel-g: 0.75rem;
+  --spacing-panel-g-section: 1.5rem;
+  --spacing-panel-g-block: 1rem;
+  --spacing-panel-g-row: 0.5rem;
+  --spacing-panel-g-grid: 0.75rem;
+  --spacing-panel-indent: 1rem;
+  --spacing-panel-y-sm: 1rem;
+  --spacing-panel-row-pad: 1rem;
+  --spacing-panel-input-x: 1rem;
+  --spacing-panel-input-y: 0.75rem;
+  --spacing-panel-icon-close: 1.5rem;
+  --spacing-panel-icon-submit: 1.25rem;
+
+  /* Panel form fields */
+  --spacing-field-x: 0.75rem;
+  --spacing-field-y: 0.5rem;
+  --spacing-field-x-sm: 0.5rem;
+  --spacing-field-y-sm: 0.25rem;
+  --radius-field: 1rem;
+  --radius-field-sm: 0.75rem;
+  --spacing-field-w-minutes: 3.75rem;
+  --spacing-field-w-submit: 3.125rem;
+  --spacing-field-w-number: 1.75rem;
+  --spacing-field-w-interval: 4rem;
+  --spacing-field-g: 0.375rem;
+
+  /* Active task card */
+  --container-card: 24rem;
+  --spacing-card-x: 1.5rem;
+  --spacing-card-y: 1rem;
+  --spacing-card-pad: 1.25rem;
+  --spacing-card-g: 0.75rem;
+  --spacing-card-g-sm: 0.5rem;
+  --spacing-card-g-lg: 1rem;
+  --spacing-card-mt: 0.375rem;
+  --spacing-card-btn: 0.75rem;
+  --spacing-card-bar: 0.375rem;
+  --radius-card: 1.5rem;
+  --spacing-card-icon: 1rem;
+  --spacing-card-icon-btn: 1.625rem;
+
+  /* Safe area (FocusPage) */
+  --spacing-safe-top: max(1rem, env(safe-area-inset-top));
+  --spacing-safe-bottom: max(1rem, env(safe-area-inset-bottom));
+  --spacing-safe-left: max(1rem, env(safe-area-inset-left));
+  --spacing-safe-right: max(1rem, env(safe-area-inset-right));
 }
 
 body {

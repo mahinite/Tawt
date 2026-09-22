@@ -58,23 +58,23 @@ export function TaskPanel({ isOpen, onClose }: TaskPanelProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 bg-black/70 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-panel-inset bg-black/70 backdrop-blur-md">
       {/* Panel Container */}
-      <div ref={panelRef} className="w-full max-w-[92vw] sm:max-w-[420px] bg-[#0A0A0A] border border-white/25 shadow-2xl overflow-hidden flex flex-col max-h-[85vh] rounded-2xl sm:rounded-[32px]">
+      <div ref={panelRef} className="w-full max-w-panel bg-[#0A0A0A] border border-white/25 shadow-2xl overflow-hidden flex flex-col max-h-panel-cap rounded-panel">
 
         {/* Header */}
-        <div className="px-4 sm:px-6 py-5 sm:py-6 border-b border-white/5 flex items-center justify-between shrink-0">
+        <div className="px-panel-x py-panel-y border-b border-white/5 flex items-center justify-between shrink-0">
           <h2 className="text-xl font-medium tracking-tight text-white">Tasks</h2>
           <button
             onClick={onClose}
             className="p-2 rounded-full hover:bg-white/10 text-white/60 hover:text-white transition-colors"
           >
-            <X size={24} />
+            <X className="size-panel-icon-close" />
           </button>
         </div>
 
         {/* Scrollable List */}
-        <div className="flex-1 overflow-y-auto px-6 py-6 pb-6 scrollbar-hide">
+        <div className="flex-1 overflow-y-auto px-panel-x py-panel-y scrollbar-hide">
           <TaskList
             tasks={tasks}
             activeTaskId={activeTaskId}
@@ -89,16 +89,16 @@ export function TaskPanel({ isOpen, onClose }: TaskPanelProps) {
         </div>
 
         {/* Input Area (Pinned to bottom) */}
-        <div className="p-6 border-t border-white/5 bg-[#0A0A0A] shrink-0">
-          <form onSubmit={handleAddTask} className="flex gap-3">
+        <div className="p-panel-pad border-t border-white/5 bg-[#0A0A0A] shrink-0">
+          <form onSubmit={handleAddTask} className="flex gap-panel-g">
             <input
               type="text"
               value={draftTaskTitle}
               onChange={(e) => setDraftTaskTitle(e.target.value)}
               placeholder="What to focus on?"
-              className="flex-1 min-w-0 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 placeholder:text-white/30 text-white focus:outline-none focus:border-white/30 transition-colors shadow-inner"
+              className="flex-1 min-w-0 bg-white/5 border border-white/10 rounded-field px-panel-input-x py-panel-input-y placeholder:text-white/30 text-white focus:outline-none focus:border-white/30 transition-colors shadow-inner"
             />
-            <div className="w-[60px] bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center gap-1.5 focus-within:border-white/30 transition-colors shadow-inner shrink-0 overflow-hidden">
+            <div className="w-field-w-minutes bg-white/5 border border-white/10 rounded-field flex items-center justify-center gap-field-g focus-within:border-white/30 transition-colors shadow-inner shrink-0 overflow-hidden">
               <input
                 type="number"
                 value={draftTaskMinutes}
@@ -112,7 +112,7 @@ export function TaskPanel({ isOpen, onClose }: TaskPanelProps) {
                   }
                 }}
                 min="1"
-                className="w-7 bg-transparent border-0 text-center text-white focus:outline-none font-inter text-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                className="w-field-w-number bg-transparent border-0 text-center text-white focus:outline-none font-inter text-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
               <span className="text-sm text-white/50 font-inter select-none pointer-events-none shrink-0">
                 m
@@ -120,10 +120,10 @@ export function TaskPanel({ isOpen, onClose }: TaskPanelProps) {
             </div>
             <button
               type="submit"
-              className="w-[50px] bg-white text-black font-medium rounded-2xl hover:bg-gray-200 transition-colors flex items-center justify-center shrink-0 disabled:opacity-50 disabled:hover:bg-white"
+              className="w-field-w-submit bg-white text-black font-medium rounded-field hover:bg-gray-200 transition-colors flex items-center justify-center shrink-0 disabled:opacity-50 disabled:hover:bg-white"
               disabled={!draftTaskTitle.trim()}
             >
-              <Plus size={20} strokeWidth={2.5} />
+              <Plus className="size-panel-icon-submit" strokeWidth={2.5} />
             </button>
           </form>
         </div>

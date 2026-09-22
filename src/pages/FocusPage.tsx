@@ -30,24 +30,17 @@ export function FocusPage() {
 
   return (
     <main
-      className="bg-black text-white flex flex-col relative"
-      style={{
-        height: "100dvh",
-        paddingTop: "max(1rem, env(safe-area-inset-top))",
-        paddingBottom: "max(1rem, env(safe-area-inset-bottom))",
-        paddingLeft: "max(1rem, env(safe-area-inset-left))",
-        paddingRight: "max(1rem, env(safe-area-inset-right))",
-      }}
+      className="bg-black text-white flex flex-col relative h-dvh pt-safe-top pb-safe-bottom pl-safe-left pr-safe-right"
     >
       {/* MORE MENU */}
-      <div className="absolute top-5 right-3.5 z-20">
+      <div className="absolute top-chrome right-chrome-x z-20">
         <button
           onClick={openSettings}
-          className="p-5 rounded-full hover:bg-white/10 transition-colors text-white/75 hover:text-white"
+          className="p-chrome rounded-full hover:bg-white/10 transition-colors text-white/75 hover:text-white"
           aria-label="More"
           title="More"
         >
-          <MoreVertical size={23} />
+          <MoreVertical className="size-chrome-icon" />
         </button>
       </div>
 
@@ -62,18 +55,18 @@ export function FocusPage() {
 
         cycle={
           <div className="select-none">
-            <div className="mx-auto w-fit flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 md:bg-transparent text-zinc-200 text-xs md:text-sm font-inter shadow-md shadow-black/40 backdrop-blur-sm md:px-5 md:py-1.5 md:gap-2.5">
+            <div className="mx-auto w-fit flex items-center gap-status-gap px-status-x py-status-y rounded-full bg-white/5 text-status font-inter shadow-md shadow-black/40 backdrop-blur-sm md:bg-transparent">
               <span>Cycles: {timer.cycleCount}</span>
 
               <button
                 onClick={() => useTimerStore.setState({ cycleCount: 0 })}
-                className="hover:text-white transition-colors p-0.5 cursor-pointer"
+                className="hover:text-white transition-colors p-status-btn cursor-pointer"
                 title="Reset cycle count"
               >
-                <RotateCcw size={15} />
+                <RotateCcw className="size-status-icon" />
               </button>
 
-              <span className="text-white/20 px-0.5 sm:px-1">•</span>
+              <span className="text-white/20 px-status-dot">•</span>
 
               <span>
                 Next: {nextLabel}
@@ -96,7 +89,7 @@ export function FocusPage() {
         }
 
         task={
-          <div className="w-full max-w-sm">
+          <div className="w-full max-w-card">
             <ActiveTask
               task={activeTask}
               onComplete={completeTask}
@@ -107,7 +100,7 @@ export function FocusPage() {
       />
 
       {/* BRAND */}
-      <div className="absolute bottom-6 right-6 font-brand text-md text-white/70 hover:text-white/90 transition-colors tracking-[0.35em] select-none">
+      <div className="absolute bottom-brand-y right-brand-x font-brand text-brand text-white/70 hover:text-white/90 transition-colors tracking-brand select-none">
         TAWT
       </div>
 

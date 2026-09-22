@@ -19,160 +19,19 @@ export function FocusLayout({
     controls,
     task,
 }: FocusLayoutProps) {
-
-    switch (layoutMode) {
-
-        case "compact":
-            return (
-                <div className="flex flex-col flex-1">
-
-                    {/* Mode Region */}
-                    <div className="flex justify-center pt-20">
-                        {mode}
-                    </div>
-
-                    {/* Region Spacer */}
-                    <div className="h-5" />
-
-                    {/* Timer Region */}
-                    <div className="flex flex-col items-center justify-center flex-1 gap-6">
-                        {timer}
-                        {cycle}
-                    </div>
-
-                    {/* Region Spacer */}
-                    <div className="h-4.5" />
-
-                    {/* Action Region */}
-                    <div className="flex justify-center pb-11">
-                        {controls}
-                    </div>
-                    {/* Region Spacer */}
-                    <div className="h-1" />
-
-                    {/* Task Region */}
-                    <div className="flex justify-center pb-26">
-                        {task}
-                    </div>
-
-                    {/* Utility Region */}
-                    <div>
-                        {/* Reserved for branding, audio, future utilities */}
-                    </div>
-
-                </div>
-            );
-
-        case "regular":
-            return (
-                <div className="flex flex-col flex-1">
-
-                    {/* Mode Region */}
-                    <div className="flex justify-center pt-20">
-                        {mode}
-                    </div>
-
-                    {/* Region Spacer */}
-                    <div className="h-8" />
-
-                    {/* Timer Region */}
-                    <div className="flex flex-col items-center justify-center flex-1 gap-6">
-                        {timer}
-                        {cycle}
-                    </div>
-
-                    {/* Region Spacer */}
-                    <div className="h-6" />
-
-                    {/* Action Region */}
-                    <div className="flex justify-center pb-16">
-                        {controls}
-                    </div>
-
-                    {/* Task Region */}
-                    <div className="flex justify-center pb-26">
-                        {task}
-                    </div>
-
-                    {/* Utility Region */}
-                    <div />
-
-                </div>
-            );
-
-        case "wide":
-            return (
-                <div className="flex flex-col flex-1">
-
-                    {/* Mode Region */}
-                    <div className="flex justify-center pt-24">
-                        {mode}
-                    </div>
-
-                    {/* Region Spacer */}
-                    <div className="h-8" />
-
-                    {/* Timer Region */}
-                    <div className="flex flex-col items-center justify-center flex-1 gap-7">
-                        {timer}
-                        {cycle}
-                    </div>
-
-                    {/* Region Spacer */}
-                    <div className="h-6" />
-
-                    {/* Action Region */}
-                    <div className="flex justify-center pb-15">
-                        {controls}
-                    </div>
-
-                    {/* Task Region */}
-                    <div className="flex justify-center pb-24">
-                        {task}
-                    </div>
-
-                    {/* Utility Region */}
-                    <div />
-
-                </div>
-            );
-
-        case "ultrawide":
-        default:
-            return (
-                <div className="flex flex-col flex-1">
-
-                    {/* Mode Region */}
-                    <div className="flex justify-center pt-40">
-                        {mode}
-                    </div>
-
-                    {/* Region Spacer */}
-                    <div className="h-10" />
-
-                    {/* Timer Region */}
-                    <div className="flex flex-col items-center justify-center flex-1 gap-6">
-                        {timer}
-                        {cycle}
-                    </div>
-
-                    {/* Region Spacer */}
-                    <div className="h-6" />
-
-                    {/* Action Region */}
-                    <div className="flex justify-center pb-10">
-                        {controls}
-                    </div>
-
-                    {/* Task Region */}
-                    <div className="flex justify-center pb-58">
-                        {task}
-                    </div>
-
-                    {/* Utility Region */}
-                    <div />
-
-                </div>
-            );
-    }
+    return (
+        <div className="flex flex-col flex-1 min-h-0" data-layout={layoutMode}>
+            <div className="flex justify-center pt-region-top">{mode}</div>
+            <div className="h-region-gap" />
+            <div className="flex flex-col items-center justify-center flex-1 min-h-0 gap-region-gap-cycle">
+                {timer}
+                {cycle}
+            </div>
+            <div className="h-region-gap-tight" />
+            <div className="flex justify-center pb-region-bottom-ctl">{controls}</div>
+            <div className="h-region-gap-xs" />
+            <div className="flex justify-center pb-region-bottom-task min-h-0">{task}</div>
+            <div />
+        </div>
+    );
 }

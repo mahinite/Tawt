@@ -14,18 +14,15 @@ export function ModeSelector({ activeMode, onModeChange }: ModeSelectorProps) {
   ];
 
   return (
-    <div className="flex items-center justify-center gap-2 flex-nowrap">
+    <div className="flex items-center justify-center gap-pill-gap flex-nowrap">
       {modes.map((mode) => (
         <button
           key={mode.id}
           onClick={() => onModeChange(mode.id)}
-          className={`px-[1rem] min-[420px]:px-[1.2rem] sm:px-[1.1rem] md:px-[1.25rem]
-            py-[0.6rem] min-[420px]:py-[0.65rem] sm:py-[0.55rem] md:py-[0.6rem]
-            text-[0.8rem] min-[420px]:text-[0.9rem] sm:text-[1rem] md:text-[1rem]
-            rounded-full font-medium transition-colors ${activeMode === mode.id
-              ? 'bg-white text-black'
-              : 'bg-transparent text-white/80 hover:text-white border border-white/40 hover:border-white/60'
-            }`}
+          className={`px-pill-x py-pill-y text-pill rounded-full font-medium transition-colors ${activeMode === mode.id
+            ? 'bg-white text-black'
+            : 'bg-transparent text-white/80 hover:text-white border border-white/40 hover:border-white/60'
+          }`}
         >
           {mode.label}
         </button>
