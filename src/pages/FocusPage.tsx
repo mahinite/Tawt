@@ -40,7 +40,7 @@ export function FocusPage() {
       }}
     >
       {/* MORE MENU */}
-      <div className="absolute top-5 right-6 z-20">
+      <div className="absolute top-5 right-3.5 z-20">
         <button
           onClick={openSettings}
           className="p-5 rounded-full hover:bg-white/10 transition-colors text-white/75 hover:text-white"
